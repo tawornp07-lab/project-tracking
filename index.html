@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#14532d">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="PTS อก.มก.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314532d'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' fill='%23ffffff' font-family='sans-serif' font-weight='bold' font-size='22'%3EPTS%3C/text%3E%3C/svg%3E">
   <title>Project Tracking System - คณะอุตสาหกรรมเกษตร มหาวิทยาลัยเกษตรศาสตร์</title>
   
   <!-- Google Fonts: Sarabun & Prompt -->
@@ -166,18 +172,19 @@
     }
 
     .nav-item.active {
-      background: #257a48;
+      background: linear-gradient(90deg, rgba(74, 222, 128, 0.32) 0%, rgba(34, 197, 94, 0.14) 100%);
       color: #ffffff;
       font-weight: 600;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+      border: 1px solid rgba(134, 239, 172, 0.25);
     }
 
     .nav-item.active::before {
       content: '';
       position: absolute;
       left: 0;
-      top: 6px;
-      bottom: 6px;
+      top: 7px;
+      bottom: 7px;
       width: 4px;
       background: #86efac;
       border-radius: 0 4px 4px 0;
@@ -216,37 +223,64 @@
       display: flex;
       flex-direction: column;
       min-width: 0;
+      width: 100%;
       height: 100vh;
       overflow-y: auto;
+      overflow-x: hidden;
     }
 
-    /* TOP HEADER */
+    /* TOP HEADER (2-Row Executive Layout) */
     .top-header {
-      background: #ffffff;
-      padding: 10px 24px;
-      border-bottom: 1px solid var(--border-color);
+      background: #f8faf9;
+      padding: 12px 22px 10px;
+      border-bottom: 1px solid #e2e8f0;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: column;
+      gap: 10px;
       position: sticky;
       top: 0;
       z-index: 50;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.03);
+    }
+
+    .top-header-row-1 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .top-header-row-2 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+      flex-wrap: wrap;
     }
 
     .header-left {
       display: flex;
       align-items: center;
       gap: 10px;
+      min-width: 0;
     }
 
     .header-title {
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 700;
-      color: #1e3a29;
+      color: #14532d;
       display: flex;
       align-items: center;
       gap: 8px;
+      margin: 0;
+    }
+
+    .header-subtitle {
+      font-size: 12px;
+      color: #64748b;
+      font-weight: 500;
     }
 
     .header-title i {
@@ -256,18 +290,23 @@
     .header-center {
       display: flex;
       align-items: center;
-      gap: 10px;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-width: 0;
+      flex: 1 1 auto;
     }
 
     .filter-group {
       display: flex;
       align-items: center;
       gap: 6px;
-      background: #f8fafc;
-      padding: 4px 8px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border-color);
+      background: #ffffff;
+      padding: 6px 12px;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
       font-size: 12.5px;
+      max-width: 100%;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
     }
 
     .filter-group label {
@@ -286,12 +325,51 @@
       cursor: pointer;
       outline: none;
       padding-right: 4px;
+      max-width: 155px;
+      text-overflow: ellipsis;
     }
 
     .header-right {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 10px;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+
+    .live-clock-widget {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+      border: 1px solid #bbf7d0;
+      color: #166534;
+      padding: 4px 10px;
+      border-radius: 10px;
+      line-height: 1.15;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .live-clock-widget i {
+      font-size: 14px;
+      color: #16a34a;
+    }
+    .live-clock-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    #live-clock-time {
+      font-size: 13px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.3px;
+      color: #14532d;
+    }
+    .live-clock-date {
+      font-size: 10.5px;
+      font-weight: 500;
+      color: #15803d;
     }
 
     .icon-btn {
@@ -462,6 +540,10 @@
       grid-template-columns: 1fr 1.35fr 1fr;
       gap: 14px;
       margin-bottom: 16px;
+    }
+    .middle-grid > *, .bottom-grid > *, .stat-cards-grid > * {
+      min-width: 0;
+    }
     }
 
     .dashboard-card {
@@ -1705,6 +1787,161 @@
       max-height: calc(100vh - 170px) !important;
     }
 
+    /* ========================================================
+       RESPONSIVE DESIGN (TABLET & MOBILE)
+       ======================================================== */
+    .mobile-menu-btn {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: #f8fafc;
+      color: #1e3a29;
+      font-size: 17px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    #sidebar-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.45);
+      z-index: 1150;
+      backdrop-filter: blur(1px);
+    }
+    #sidebar-backdrop.active {
+      display: block;
+    }
+
+    @media (max-width: 1200px) {
+      .stat-cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .middle-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .bottom-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .mobile-menu-btn {
+        display: inline-flex;
+      }
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 1200;
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.25);
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .main-wrapper {
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+        overflow-y: visible;
+      }
+      .top-header {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 10px 14px;
+      }
+      .header-center {
+        width: 100%;
+        order: 3;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .filter-group {
+        flex-shrink: 0;
+      }
+      .content-area, .main-content {
+        padding: 14px;
+      }
+      .standard-card, .dashboard-card {
+        overflow-x: auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .stat-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+      .stat-card {
+        padding: 10px;
+        gap: 8px;
+      }
+      .stat-value {
+        font-size: 20px;
+      }
+      .middle-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-row, .form-grid, .print-photo-grid, .print-signature-section {
+        grid-template-columns: 1fr !important;
+      }
+      #page-settings .settings-panel > div[style*="grid-template-columns"],
+      #page-line div[style*="grid-template-columns"],
+      #projectDetailModal div[style*="grid-template-columns: repeat(4"] {
+        grid-template-columns: 1fr !important;
+      }
+      .toolbar-row, .card-header-row, .gantt-card-header {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .header-title {
+        font-size: 14.5px;
+      }
+      .modal-box {
+        width: 96%;
+        max-height: 92vh;
+      }
+      .modal-body {
+        padding: 14px;
+      }
+      .card-expanded {
+        inset: 8px !important;
+        max-height: calc(100vh - 16px) !important;
+        padding: 14px !important;
+      }
+      .status-chart-container, .budget-content {
+        flex-direction: column;
+        gap: 14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .user-profile .user-name {
+        display: none;
+      }
+      #edit-mode-toggle-btn span {
+        display: none;
+      }
+      .header-right {
+        gap: 6px;
+      }
+      .live-clock-date {
+        display: none;
+      }
+      .live-clock-widget {
+        padding: 4px 8px;
+      }
+    }
+
     /* Print styling */
     @media print {
       .sidebar, .top-header, .toolbar-row, .btn, .time-toggles, .gantt-time-toggles, .filter-group, .card-expand-btn { display: none !important; }
@@ -1735,7 +1972,7 @@
             ขณะนี้ระบบอยู่ใน <strong>โหมดดูอย่างเดียว (View-Only)</strong> เพื่อป้องกันการแก้ไขโดยไม่ตั้งใจ กรุณากรอกรหัส PIN สำหรับเจ้าหน้าที่/ผู้ดูแลระบบเพื่อดำเนินการต่อ
           </p>
           <div class="form-group" style="margin-bottom: 0;">
-            <label>รหัส PIN (ค่าเริ่มต้น: 1234)</label>
+            <label>รหัส PIN</label>
             <input type="password" inputmode="numeric" class="form-control" id="pin-unlock-input" placeholder="กรอกรหัส PIN..." autocomplete="off" required style="font-size: 16px; letter-spacing: 3px; text-align: center;">
           </div>
           <div id="pin-unlock-error" style="display: none; font-size: 12px; color: #dc2626; text-align: center; font-weight: 600;">
@@ -1753,7 +1990,8 @@
   <!-- ========================================================
        SIDEBAR NAVIGATION
        ======================================================== -->
-  <aside class="sidebar">
+  <div id="sidebar-backdrop" onclick="closeMobileSidebar()"></div>
+  <aside class="sidebar" id="app-sidebar">
     <div class="sidebar-brand">
       <div class="brand-icon">
         <i class="fa-solid fa-wheat-awn"></i>
@@ -1820,97 +2058,115 @@
     
     <!-- TOP HEADER -->
     <header class="top-header">
-      <div class="header-left">
-        <h1 class="header-title" id="page-title">
-          <i class="fa-solid fa-chart-simple"></i>
-          <span>Dashboard : ภาพรวมโครงการ</span>
-        </h1>
-      </div>
-
-      <div class="header-center">
-        <div class="filter-group">
-          <label><i class="fa-solid fa-calendar-days"></i> ปีงบประมาณ</label>
-          <select class="filter-select" id="filter-fiscal-year" onchange="applyFilters()">
-            <option value="all">ทุกปีงบ</option>
-            <option value="2567" selected>2567</option>
-            <option value="2568">2568</option>
-            <option value="2569">2569</option>
-          </select>
+      <div class="top-header-row-1">
+        <div class="header-left">
+          <button type="button" class="mobile-menu-btn" onclick="toggleMobileSidebar()" aria-label="เปิดเมนู">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div style="display: flex; flex-direction: column; line-height: 1.25;">
+            <h1 class="header-title" id="page-title">
+              <i class="fa-solid fa-chart-simple"></i>
+              <span>Dashboard : ภาพรวมโครงการ</span>
+            </h1>
+            <span class="header-subtitle">ระบบติดตามความก้าวหน้าโครงการ (Project Tracking System)</span>
+          </div>
         </div>
 
-        <div class="filter-group">
-          <label><i class="fa-solid fa-building-columns"></i> หน่วยงาน</label>
-          <select class="filter-select" id="filter-department" onchange="applyFilters()">
-            <option value="all">ทุกภาควิชา/หน่วยงาน</option>
-            <option value="ภาควิชาเทคโนโลยีชีวภาพ">ภาควิชาเทคโนโลยีชีวภาพ</option>
-            <option value="ภาควิชาพัฒนาผลิตภัณฑ์">ภาควิชาพัฒนาผลิตภัณฑ์</option>
-            <option value="ภาควิชาวิทยาศาสตร์และเทคโนโลยีการอาหาร">ภาควิชาวิทยาศาสตร์และเทคโนโลยีการอาหาร</option>
-            <option value="ภาควิชาเทคโนโลยีการบรรจุและวัสดุ">ภาควิชาเทคโนโลยีการบรรจุและวัสดุ</option>
-            <option value="สำนักงานเลขานุการ คณะอุตสาหกรรมเกษตร">สำนักงานเลขานุการ</option>
-          </select>
-        </div>
+        <div class="header-right">
+          <div id="live-clock-widget" class="live-clock-widget" title="วัน-เวลาปัจจุบัน">
+            <i class="fa-regular fa-clock"></i>
+            <div class="live-clock-text">
+              <span id="live-clock-time">--:--:--</span>
+              <span id="live-clock-date" class="live-clock-date">-</span>
+            </div>
+          </div>
 
-        <div class="filter-group">
-          <label>ช่วงเวลา</label>
-          <select class="filter-select" id="filter-period" onchange="applyFilters()">
-            <option value="month">รายเดือน</option>
-            <option value="quarter">รายไตรมาส</option>
-            <option value="year">รายปี</option>
-          </select>
-        </div>
+          <button class="icon-btn" title="แจ้งเตือน" onclick="toggleNotifications()">
+            <i class="fa-regular fa-bell"></i>
+            <span class="badge-counter" id="unread-count">0</span>
+          </button>
 
-        <div class="filter-group">
-          <label>เดือน</label>
-          <select class="filter-select" id="filter-month" onchange="applyFilters()">
-            <option value="all" selected>ทุกเดือน</option>
-            <option value="1">ม.ค.</option>
-            <option value="2">ก.พ.</option>
-            <option value="3">มี.ค.</option>
-            <option value="4">เม.ย.</option>
-            <option value="5">พ.ค.</option>
-            <option value="6">มิ.ย.</option>
-            <option value="7">ก.ค.</option>
-            <option value="8">ส.ค.</option>
-            <option value="9">ก.ย.</option>
-            <option value="10">ต.ค.</option>
-            <option value="11">พ.ย.</option>
-            <option value="12">ธ.ค.</option>
-          </select>
-        </div>
+          <button class="icon-btn" title="คู่มือการใช้งาน" onclick="showHelpModal()">
+            <i class="fa-regular fa-circle-question"></i>
+          </button>
 
-        <div class="filter-group">
-          <label>โครงการ</label>
-          <select class="filter-select" id="filter-project" onchange="applyFilters()">
-            <option value="all">ทุกโครงการ</option>
-          </select>
+          <div class="user-profile" onclick="openRoleSwitcherModal()" title="คลิกเพื่อสลับสิทธิ์การใช้งาน (Admin / ผู้บริหาร / ผู้จัดการโครงการ / ผู้ติดตาม)">
+            <div class="user-avatar" id="header-user-avatar">
+              <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2;">
+              <span class="user-name" id="header-user-name">ผู้ดูแลระบบ</span>
+              <span class="role-badge role-admin" id="header-user-role-badge">Admin</span>
+            </div>
+            <i class="fa-solid fa-angle-down" style="font-size: 11px; color: #94a3b8; margin-left: 4px;"></i>
+          </div>
         </div>
       </div>
 
-      <div class="header-right">
-        <button id="edit-mode-toggle-btn" onclick="toggleEditModeLock()" title="คลิกเพื่อปลดล็อก/ล็อกโหมดแก้ไข" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px; border-radius: 20px; border: 1px solid #cbd5e1; background: #f8fafc; color: #475569; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; white-space: nowrap;">
+      <div class="top-header-row-2">
+        <div class="header-center">
+          <div class="filter-group">
+            <label><i class="fa-solid fa-calendar-days"></i> ปีงบประมาณ</label>
+            <select class="filter-select" id="filter-fiscal-year" onchange="applyFilters()">
+              <option value="all">ทุกปีงบ</option>
+              <option value="2567" selected>2567</option>
+              <option value="2568">2568</option>
+              <option value="2569">2569</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label><i class="fa-solid fa-building-columns"></i> หน่วยงาน</label>
+            <select class="filter-select" id="filter-department" onchange="applyFilters()">
+              <option value="all">ทุกภาควิชา/หน่วยงาน</option>
+              <option value="ภาควิชาเทคโนโลยีชีวภาพ">ภาควิชาเทคโนโลยีชีวภาพ</option>
+              <option value="ภาควิชาพัฒนาผลิตภัณฑ์">ภาควิชาพัฒนาผลิตภัณฑ์</option>
+              <option value="ภาควิชาวิทยาศาสตร์และเทคโนโลยีการอาหาร">ภาควิชาวิทยาศาสตร์และเทคโนโลยีการอาหาร</option>
+              <option value="ภาควิชาเทคโนโลยีการบรรจุและวัสดุ">ภาควิชาเทคโนโลยีการบรรจุและวัสดุ</option>
+              <option value="สำนักงานเลขานุการ คณะอุตสาหกรรมเกษตร">สำนักงานเลขานุการ</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label><i class="fa-solid fa-layer-group"></i> ช่วงเวลา</label>
+            <select class="filter-select" id="filter-period" onchange="applyFilters()">
+              <option value="month">รายเดือน</option>
+              <option value="quarter">รายไตรมาส</option>
+              <option value="year">รายปี</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label><i class="fa-regular fa-calendar"></i> เดือน</label>
+            <select class="filter-select" id="filter-month" onchange="applyFilters()">
+              <option value="all" selected>ทุกเดือน</option>
+              <option value="1">ม.ค.</option>
+              <option value="2">ก.พ.</option>
+              <option value="3">มี.ค.</option>
+              <option value="4">เม.ย.</option>
+              <option value="5">พ.ค.</option>
+              <option value="6">มิ.ย.</option>
+              <option value="7">ก.ค.</option>
+              <option value="8">ส.ค.</option>
+              <option value="9">ก.ย.</option>
+              <option value="10">ต.ค.</option>
+              <option value="11">พ.ย.</option>
+              <option value="12">ธ.ค.</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label><i class="fa-solid fa-flag"></i> โครงการ</label>
+            <select class="filter-select" id="filter-project" onchange="applyFilters()">
+              <option value="all">ทุกโครงการ</option>
+            </select>
+          </div>
+        </div>
+
+        <button id="edit-mode-toggle-btn" onclick="toggleEditModeLock()" title="คลิกเพื่อปลดล็อก/ล็อกโหมดแก้ไข" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 10px; border: 1px solid #cbd5e1; background: #ffffff; color: #475569; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; white-space: nowrap; box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);">
           <i class="fa-solid fa-lock"></i>
           <span>โหมดดูอย่างเดียว</span>
         </button>
-
-        <button class="icon-btn" title="แจ้งเตือน" onclick="toggleNotifications()">
-          <i class="fa-regular fa-bell"></i>
-          <span class="badge-counter" id="unread-count">0</span>
-        </button>
-
-        <button class="icon-btn" title="คู่มือการใช้งาน" onclick="showHelpModal()">
-          <i class="fa-regular fa-circle-question"></i>
-        </button>
-
-        <div class="user-profile" onclick="openRoleSwitcherModal()" title="คลิกเพื่อสลับสิทธิ์การใช้งาน (Admin / ผู้บริหาร / ผู้จัดการโครงการ / ผู้ติดตาม)">
-          <div class="user-avatar" id="header-user-avatar">
-            <i class="fa-solid fa-user-shield"></i>
-          </div>
-          <div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2;">
-            <span class="user-name" id="header-user-name">ผู้ดูแลระบบ</span>
-            <span class="role-badge role-admin" id="header-user-role-badge">Admin</span>
-          </div>
-          <i class="fa-solid fa-angle-down" style="font-size: 11px; color: #94a3b8; margin-left: 4px;"></i>
-        </div>
       </div>
     </header>
 
@@ -3725,7 +3981,7 @@
     const DEFAULT_YEARS = ['2567', '2568', '2569', '2570'];
 
     const DEFAULT_USERS = [
-      { id: 1, name: "รศ.ดร. สุรชัย พัฒนกุล", email: "surachai.p@ku.th", dept: "สำนักงานเลขานุการ คณะอุตสาหกรรมเกษตร", role: "admin", roleName: "ผู้ดูแลระบบ (Admin)" },
+      { id: 1, name: "นายถาวร ไพรสิทธิ์", email: "taworn.p@ku.th", dept: "สำนักงานเลขานุการ คณะอุตสาหกรรมเกษตร", role: "admin", roleName: "ผู้ดูแลระบบ (Admin)" },
       { id: 2, name: "ศ.ดร. ธนภัทร ธรรมวิจัย", email: "thanapat.t@ku.th", dept: "คณบดี คณะอุตสาหกรรมเกษตร", role: "executive", roleName: "ผู้บริหาร" },
       { id: 3, name: "ผศ.ดร. อัจฉรา พันธุศาสตร์", email: "atchara.p@ku.th", dept: "ภาควิชาเทคโนโลยีชีวภาพ", role: "manager", roleName: "ผู้รับผิดชอบโครงการ" },
       { id: 4, name: "ดร. กฤษณะ เทคโนโลยี", email: "kritsana.t@ku.th", dept: "ภาควิชาพัฒนาผลิตภัณฑ์", role: "follower", roleName: "ผู้ติดตาม" }
@@ -9025,6 +9281,7 @@
           if (json.data) {
             _isApplyingRemoteState = true;
             appState = Object.assign({}, appState, json.data);
+            normalizeHistoryToTaworn(false);
             saveState();
             _isApplyingRemoteState = false;
             populateProjectDropdowns();
@@ -9063,9 +9320,90 @@
       }, 1200);
     }
 
+    function toggleMobileSidebar() {
+      const sb = document.getElementById('app-sidebar');
+      const bd = document.getElementById('sidebar-backdrop');
+      if (!sb) return;
+      const isOpen = sb.classList.toggle('open');
+      if (bd) bd.classList.toggle('active', isOpen);
+    }
+
+    function closeMobileSidebar() {
+      const sb = document.getElementById('app-sidebar');
+      const bd = document.getElementById('sidebar-backdrop');
+      if (sb) sb.classList.remove('open');
+      if (bd) bd.classList.remove('active');
+    }
+
+    function startLiveClock() {
+      const THAI_DAYS_SHORT = ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'];
+      function updateClock() {
+        const now = new Date();
+        const hh = String(now.getHours()).padStart(2, '0');
+        const mm = String(now.getMinutes()).padStart(2, '0');
+        const ss = String(now.getSeconds()).padStart(2, '0');
+        const dayStr = THAI_DAYS_SHORT[now.getDay()];
+        const d = now.getDate();
+        const mStr = THAI_MONTHS_SHORT[now.getMonth()];
+        const yBE = now.getFullYear() + 543;
+
+        const timeEl = document.getElementById('live-clock-time');
+        const dateEl = document.getElementById('live-clock-date');
+        if (timeEl) timeEl.textContent = `${hh}:${mm}:${ss} น.`;
+        if (dateEl) dateEl.textContent = `${dayStr} ${d} ${mStr} ${yBE}`;
+      }
+      updateClock();
+      setInterval(updateClock, 1000);
+    }
+
+    function normalizeHistoryToTaworn(shouldSave = true) {
+      const TARGET_NAME = 'นายถาวร ไพรสิทธิ์';
+      const TARGET_AUDIT_USER = `${TARGET_NAME} (ผู้ดูแลระบบ (Admin))`;
+      let changed = false;
+
+      if (appState.users && appState.users[0] && appState.users[0].name !== TARGET_NAME && appState.users[0].role === 'admin') {
+        appState.users[0].name = TARGET_NAME;
+        changed = true;
+      }
+      if (appState.currentUser && appState.currentUser.name !== TARGET_NAME && appState.currentUser.role === 'admin') {
+        appState.currentUser.name = TARGET_NAME;
+        changed = true;
+      }
+      if (Array.isArray(appState.auditLogs)) {
+        appState.auditLogs.forEach(log => {
+          if (log.user !== TARGET_AUDIT_USER) {
+            log.user = TARGET_AUDIT_USER;
+            changed = true;
+          }
+        });
+      }
+      if (Array.isArray(appState.projects)) {
+        appState.projects.forEach(proj => {
+          (proj.tasks || []).forEach(task => {
+            (task.siteLogs || []).forEach(sLog => {
+              if (sLog.inspector !== TARGET_NAME) {
+                sLog.inspector = TARGET_NAME;
+                changed = true;
+              }
+            });
+          });
+        });
+      }
+
+      if (changed && shouldSave) {
+        saveState();
+      }
+      return changed;
+    }
+
     // --- 17. APP INITIALIZATION ---
     function initApp() {
       try {
+        normalizeHistoryToTaworn(true);
+        startLiveClock();
+        document.querySelectorAll('.sidebar-nav .nav-item').forEach(el => {
+          el.addEventListener('click', closeMobileSidebar);
+        });
         updateEditModeButtonUI();
         guardEditorFunctions();
         initCardExpandButtons();
