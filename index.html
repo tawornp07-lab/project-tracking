@@ -1796,6 +1796,44 @@
       border-bottom: none;
     }
 
+    #presentation-fullscreen-box.pres-expanded,
+    #presentation-fullscreen-box:fullscreen {
+      position: fixed !important;
+      inset: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      min-height: 100vh !important;
+      max-height: 100vh !important;
+      border-radius: 0 !important;
+      z-index: 9996 !important;
+      margin: 0 !important;
+      background: #ffffff !important;
+    }
+    #presentation-fullscreen-box.pres-expanded .slide-content,
+    #presentation-fullscreen-box:fullscreen .slide-content {
+      padding: 28px 40px !important;
+    }
+    #presentation-fullscreen-box.pres-expanded .pres-table-wrap,
+    #presentation-fullscreen-box:fullscreen .pres-table-wrap {
+      max-height: calc(100vh - 280px) !important;
+    }
+    .pres-issues-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 330px;
+      overflow-y: auto;
+    }
+    #presentation-fullscreen-box.pres-expanded .pres-issues-wrap,
+    #presentation-fullscreen-box:fullscreen .pres-issues-wrap {
+      max-height: calc(100vh - 220px) !important;
+    }
+    body.printing-slides .pres-table-wrap,
+    body.printing-slides .pres-issues-wrap {
+      max-height: none !important;
+      overflow: visible !important;
+    }
+
     /* Modal System */
     .modal-overlay {
       position: fixed;
@@ -2121,17 +2159,19 @@
     }
     .card-expanded {
       position: fixed !important;
-      inset: 18px !important;
-      width: auto !important;
-      height: auto !important;
-      max-height: calc(100vh - 36px) !important;
+      inset: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      max-height: 100vh !important;
       z-index: 9995 !important;
       margin: 0 !important;
-      padding: 20px 24px !important;
+      padding: 20px 28px !important;
       overflow-y: auto !important;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45) !important;
-      border-radius: 12px !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
       background: #ffffff !important;
+      display: flex !important;
+      flex-direction: column !important;
     }
     .card-expanded .progress-chart-wrapper {
       height: calc(100vh - 210px) !important;
@@ -2158,9 +2198,26 @@
     .card-expanded .gantt-wrapper,
     .card-expanded .gantt-table-wrapper,
     .card-expanded .project-table-container {
-      max-height: calc(100vh - 150px) !important;
+      flex: 1 !important;
+      max-height: calc(100vh - 130px) !important;
       height: auto !important;
       overflow: auto !important;
+    }
+    .card-expanded .gantt-table {
+      font-size: 13px !important;
+    }
+    .card-expanded .gantt-table .task-header-th {
+      min-width: 260px !important;
+    }
+    .card-expanded .gantt-task-row td {
+      height: 40px !important;
+      padding: 6px 10px !important;
+    }
+    .card-expanded .gantt-plan-track {
+      height: 22px !important;
+    }
+    .card-expanded .gantt-bar-overdue {
+      height: 22px !important;
     }
     .card-expanded .gantt-task-title {
       max-width: none !important;
@@ -3332,7 +3389,7 @@
             <span style="font-size: 13px; color: #475569; font-weight: 600;" id="slide-counter">สไลด์ 1 / 5</span>
             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
               <button class="btn btn-outline" style="color: #166534; border-color: #bbf7d0; background: #f0fdf4;" onclick="printAllPresentationSlides()"><i class="fa-solid fa-print"></i> พิมพ์สไลด์ทั้งหมด (PDF)</button>
-              <button class="btn btn-outline" style="color: #334155; border-color: #cbd5e1; background: #ffffff;" onclick="togglePresentationFullscreen()"><i class="fa-solid fa-expand"></i> เต็มหน้าจอ</button>
+              <button id="pres-fullscreen-btn" class="btn btn-outline" style="color: #334155; border-color: #cbd5e1; background: #ffffff;" onclick="togglePresentationFullscreen()"><i class="fa-solid fa-expand"></i> เต็มหน้าจอ</button>
               <button class="btn btn-primary" onclick="nextSlide()">สไลด์ถัดไป <i class="fa-solid fa-chevron-right"></i></button>
             </div>
           </div>
@@ -3688,6 +3745,42 @@
             </div>
           </div>
 
+          <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 12px; display: flex; flex-direction: column; gap: 10px;">
+            <div style="font-size: 12.5px; font-weight: 700; color: #1e3a29;">
+              <i class="fa-solid fa-user-tie"></i> ข้อมูลผู้ดูแลโครงการ &amp; บริษัทผู้รับเหมา (ถ้ามี)
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>เบอร์โทรศัพท์ผู้ดูแลโครงการ</label>
+                <input type="text" class="form-control" id="form-proj-manager-phone" placeholder="เช่น 08x-xxx-xxxx">
+              </div>
+              <div class="form-group">
+                <label>ประธานกรรมการตรวจรับพัสดุ</label>
+                <input type="text" class="form-control" id="form-proj-inspector-chair" placeholder="ชื่อ-สกุล ประธานตรวจรับ">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>ชื่อบริษัทผู้รับเหมา</label>
+                <input type="text" class="form-control" id="form-proj-contractor-company" placeholder="เช่น บริษัท ... จำกัด">
+              </div>
+              <div class="form-group">
+                <label>เลขที่สัญญา / ใบสั่งจ้าง</label>
+                <input type="text" class="form-control" id="form-proj-contract-no" placeholder="เช่น สญ. 123/2569">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>ผู้ประสานงาน / วิศวกรหน้างาน</label>
+                <input type="text" class="form-control" id="form-proj-contractor-contact" placeholder="ชื่อผู้ติดต่อฝั่งบริษัท">
+              </div>
+              <div class="form-group">
+                <label>เบอร์โทรศัพท์บริษัทผู้รับเหมา</label>
+                <input type="text" class="form-control" id="form-proj-contractor-phone" placeholder="เช่น 08x-xxx-xxxx">
+              </div>
+            </div>
+          </div>
+
           <div class="form-group">
             <label>ความคืบหน้าเริ่มต้น (%)</label>
             <input type="number" class="form-control" id="form-proj-progress" min="0" max="100" value="0">
@@ -3729,6 +3822,17 @@
           <div>
             <div style="font-size: 11px; color: var(--text-muted);">เบิกจ่ายจริง / คงเหลือ</div>
             <div style="font-weight: 600; font-size: 12px;" id="detail-proj-spent-remain">0 / 0 บาท</div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px;">
+          <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: var(--radius-sm); padding: 10px 12px;">
+            <div style="font-size: 11.5px; font-weight: 700; color: #166534; margin-bottom: 4px;"><i class="fa-solid fa-user-shield"></i> ผู้ดูแลโครงการ (หน่วยงาน)</div>
+            <div id="detail-proj-supervisor-info" style="font-size: 12px; color: #1e293b; line-height: 1.55;">-</div>
+          </div>
+          <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 10px 12px;">
+            <div style="font-size: 11.5px; font-weight: 700; color: #334155; margin-bottom: 4px;"><i class="fa-solid fa-building"></i> บริษัทผู้รับเหมา (คู่สัญญา)</div>
+            <div id="detail-proj-contractor-info" style="font-size: 12px; color: #1e293b; line-height: 1.55;">-</div>
           </div>
         </div>
 
@@ -7578,6 +7682,25 @@
       document.getElementById('detail-proj-spent-remain').textContent = `${realSpent.toLocaleString()} / ${remaining.toLocaleString()} บาท`;
       document.getElementById('detail-proj-pct').textContent = `${proj.progress || 0}%`;
 
+      const supEl = document.getElementById('detail-proj-supervisor-info');
+      if (supEl) {
+        const phoneHtml = proj.managerPhone ? `<a href="tel:${proj.managerPhone.replace(/[^0-9+]/g, '')}" style="color:#166534;text-decoration:none;font-weight:600;"><i class="fa-solid fa-phone"></i> ${proj.managerPhone}</a>` : '-';
+        supEl.innerHTML = `
+          <div><strong>ผู้ดูแลโครงการ:</strong> ${proj.manager || '-'}</div>
+          <div><strong>เบอร์ติดต่อ:</strong> ${phoneHtml}</div>
+          <div><strong>ประธานตรวจรับ:</strong> ${proj.inspectorChair || '-'}</div>
+        `;
+      }
+      const conEl = document.getElementById('detail-proj-contractor-info');
+      if (conEl) {
+        const cPhoneHtml = proj.contractorPhone ? `<a href="tel:${proj.contractorPhone.replace(/[^0-9+]/g, '')}" style="color:#0369a1;text-decoration:none;font-weight:600;"><i class="fa-solid fa-phone"></i> ${proj.contractorPhone}</a>` : '-';
+        conEl.innerHTML = `
+          <div><strong>บริษัท:</strong> ${proj.contractorCompany || '-'}</div>
+          <div><strong>เลขที่สัญญา:</strong> ${proj.contractNo || '-'}</div>
+          <div><strong>ผู้ประสานงาน:</strong> ${proj.contractorContact || '-'} (${cPhoneHtml})</div>
+        `;
+      }
+
       const bar = document.getElementById('detail-proj-bar');
       if (bar) {
         bar.style.width = `${proj.progress || 0}%`;
@@ -7698,6 +7821,12 @@
       document.getElementById('form-proj-objectives').value = proj.objectives || '';
       document.getElementById('form-proj-kpi').value = proj.kpi || '';
       document.getElementById('form-proj-progress').value = proj.progress || 0;
+      if (document.getElementById('form-proj-manager-phone')) document.getElementById('form-proj-manager-phone').value = proj.managerPhone || '';
+      if (document.getElementById('form-proj-inspector-chair')) document.getElementById('form-proj-inspector-chair').value = proj.inspectorChair || '';
+      if (document.getElementById('form-proj-contractor-company')) document.getElementById('form-proj-contractor-company').value = proj.contractorCompany || '';
+      if (document.getElementById('form-proj-contract-no')) document.getElementById('form-proj-contract-no').value = proj.contractNo || '';
+      if (document.getElementById('form-proj-contractor-contact')) document.getElementById('form-proj-contractor-contact').value = proj.contractorContact || '';
+      if (document.getElementById('form-proj-contractor-phone')) document.getElementById('form-proj-contractor-phone').value = proj.contractorPhone || '';
 
       document.getElementById('projectModalTitle').textContent = 'แก้ไขข้อมูลโครงการ';
       openModal('projectModal');
@@ -7721,6 +7850,12 @@
       const objectives = document.getElementById('form-proj-objectives').value.trim();
       const kpi = document.getElementById('form-proj-kpi').value.trim();
       const progress = parseInt(document.getElementById('form-proj-progress').value) || 0;
+      const managerPhone = document.getElementById('form-proj-manager-phone') ? document.getElementById('form-proj-manager-phone').value.trim() : '';
+      const inspectorChair = document.getElementById('form-proj-inspector-chair') ? document.getElementById('form-proj-inspector-chair').value.trim() : '';
+      const contractorCompany = document.getElementById('form-proj-contractor-company') ? document.getElementById('form-proj-contractor-company').value.trim() : '';
+      const contractNo = document.getElementById('form-proj-contract-no') ? document.getElementById('form-proj-contract-no').value.trim() : '';
+      const contractorContact = document.getElementById('form-proj-contractor-contact') ? document.getElementById('form-proj-contractor-contact').value.trim() : '';
+      const contractorPhone = document.getElementById('form-proj-contractor-phone') ? document.getElementById('form-proj-contractor-phone').value.trim() : '';
 
       const projectData = {
         code,
@@ -7729,6 +7864,12 @@
         name,
         manager,
         email,
+        managerPhone,
+        inspectorChair,
+        contractorCompany,
+        contractNo,
+        contractorContact,
+        contractorPhone,
         status,
         budget,
         startDate,
@@ -9386,7 +9527,7 @@
             ? `สรุปรายงานปัญหาหน้างาน ${allIssues.length} หัวข้อ และงานเกินกำหนด ${delayedTasksList.length} รายการ พร้อมภาพถ่ายหลักฐาน`
             : `ทุกหัวข้องานที่เลือกดำเนินการได้ตามแผนงาน ยังไม่มีรายงานปัญหาอุปสรรค`,
           extraHtml: `
-            <div style="display: flex; flex-direction: column; gap: 10px; max-height: 330px; overflow-y: auto;">
+            <div class="pres-issues-wrap">
               ${delayedTasksList.map((dl, i) => `
                 <div style="background: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid #dc2626; padding: 10px 14px; border-radius: 8px; font-size: 12.5px; color: #7f1d1d;">
                   <strong><i class="fa-solid fa-triangle-exclamation"></i> งานล่าช้า ${i + 1}: ${dl.taskTitle}</strong> (${dl.projName})
@@ -9505,17 +9646,53 @@
       setTimeout(cleanup, 1500);
     }
 
+    function updatePresFullscreenBtn(isFull) {
+      const btn = document.getElementById('pres-fullscreen-btn');
+      if (!btn) return;
+      btn.innerHTML = isFull
+        ? '<i class="fa-solid fa-compress"></i> ย่อลง'
+        : '<i class="fa-solid fa-expand"></i> เต็มหน้าจอ';
+    }
+
     function togglePresentationFullscreen() {
       const box = document.getElementById('presentation-fullscreen-box');
       if (!box) return;
-      if (!document.fullscreenElement) {
-        box.requestFullscreen().catch(err => {
-          console.warn('Fullscreen error:', err);
-        });
+      const isExpanded = box.classList.contains('pres-expanded') || !!document.fullscreenElement;
+      if (!isExpanded) {
+        box.classList.add('pres-expanded');
+        updatePresFullscreenBtn(true);
+        if (box.requestFullscreen) {
+          box.requestFullscreen().catch(() => {});
+        }
       } else {
-        document.exitFullscreen();
+        box.classList.remove('pres-expanded');
+        updatePresFullscreenBtn(false);
+        if (document.fullscreenElement && document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {});
+        }
       }
     }
+
+    document.addEventListener('fullscreenchange', () => {
+      const box = document.getElementById('presentation-fullscreen-box');
+      if (!box) return;
+      if (!document.fullscreenElement && !box.classList.contains('pres-expanded')) {
+        updatePresFullscreenBtn(false);
+      } else if (!document.fullscreenElement && box.classList.contains('pres-expanded')) {
+        box.classList.remove('pres-expanded');
+        updatePresFullscreenBtn(false);
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const box = document.getElementById('presentation-fullscreen-box');
+        if (box && box.classList.contains('pres-expanded')) {
+          box.classList.remove('pres-expanded');
+          updatePresFullscreenBtn(false);
+        }
+      }
+    });
 
     // --- 14. LINE OA NOTIFICATION MODULE ---
     function testSendLine() {
