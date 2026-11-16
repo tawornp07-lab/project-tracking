@@ -7573,7 +7573,7 @@
       if (list.length === 0) {
         tbody.innerHTML = `
           <tr>
-            <td colspan="9" style="text-align: center; padding: 40px 20px; color: #94a3b8;">
+            <td colspan="10" style="text-align: center; padding: 40px 20px; color: #94a3b8;">
               <i class="fa-regular fa-folder-open" style="font-size: 32px; color: #cbd5e1; display: block; margin-bottom: 8px;"></i>
               ไม่พบข้อมูลโครงการตามเงื่อนไขที่เลือก<br>
               <button class="btn btn-primary" style="margin-top: 10px;" onclick="openAddProjectModal()">
@@ -7610,6 +7610,7 @@
                 </div>
               </div>
             </td>
+            <td style="font-size: 12.5px; color: #334155;">${proj.department || 'คณะอุตสาหกรรมเกษตร'}</td>
             <td>${proj.manager}</td>
             <td style="font-weight: 700; color: #166534;">${(proj.budget || 0).toLocaleString()}</td>
             <td style="color: #0284c7; font-weight: 700;" title="คงเหลือ: ${remaining.toLocaleString()} บาท">${realSpent.toLocaleString()}</td>
