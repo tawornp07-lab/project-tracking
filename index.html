@@ -6137,18 +6137,18 @@
         let statusBadge = '';
         if (sched.statusKey === 'delayed') {
           statusBadge = `<span class="badge-status badge-delayed"><i class="fa-solid fa-triangle-exclamation"></i> ล่าช้า ${sched.delayDays} วัน</span>`;
-        } else if (sched.statusKey === 'completed-late') {
-          statusBadge = `<span class="badge-status" style="background:#fffbeb; color:#b45309; border:1px solid #fde68a;"><i class="fa-solid fa-circle-check"></i> เสร็จล่าช้า (${sched.completedDelayDays} วัน)</span>`;
-        } else if (sched.statusKey === 'completed-on-time') {
-          statusBadge = `<span class="badge-status badge-completed"><i class="fa-solid fa-circle-check"></i> เสร็จตามแผน</span>`;
-        } else if (sched.statusKey === 'inprogress') {
+        } else if (sched.statusKey === 'completed_late') {
+          statusBadge = `<span class="badge-status" style="background:#fffbeb; color:#b45309; border:1px solid #fde68a;"><i class="fa-solid fa-circle-check"></i> เสร็จล่าช้า (${sched.delayDays} วัน)</span>`;
+        } else if (sched.statusKey === 'completed_ontime' || sched.statusKey === 'completed_no_date') {
+          statusBadge = `<span class="badge-status badge-completed"><i class="fa-solid fa-circle-check"></i> ${sched.statusKey === 'completed_ontime' ? 'เสร็จตามแผน' : 'เสร็จสิ้น'}</span>`;
+        } else if (sched.statusKey === 'doing') {
           statusBadge = `<span class="badge-status badge-inprogress"><i class="fa-solid fa-rotate"></i> กำลังดำเนินการ</span>`;
         } else {
           statusBadge = `<span class="badge-status" style="background:#f1f5f9; color:#64748b; border:1px solid #cbd5e1;"><i class="fa-regular fa-clock"></i> รอดำเนินการ</span>`;
         }
 
         const progColor = sched.isDelayed ? '#dc2626' : (task.progress === 100 ? '#16a34a' : (task.progress >= 70 ? '#22c55e' : (task.progress > 0 ? '#f59e0b' : '#94a3b8')));
-        const extBadge = sched.isExtended ? `<span style="font-size:10px; background:#fef3c7; color:#b45309; border:1px solid #fde68a; padding:1px 5px; border-radius:4px;" title="แผนเดิม: ${sched.baselineEndDate}">ขยายเวลา (เดิม ${sched.baselineEndDate})</span>` : '';
+        const extBadge = sched.isExtended ? `<span style="font-size:10px; background:#fef3c7; color:#b45309; border:1px solid #fde68a; padding:1px 5px; border-radius:4px;" title="แผนเดิม: ${sched.baselineEnd}">ขยายเวลา (เดิม ${sched.baselineEnd})</span>` : '';
 
         let problemBadge = '';
         if (task.consultation && task.consultation.needed) {
@@ -6430,15 +6430,19 @@
       if (task.progress === 100) {
         task.barClass = 'bar-complete';
         task.status = 'done';
+        task.actualEndDate = task.actualEndDate || getBangkokTodayStr();
       } else if (task.progress >= 60) {
         task.barClass = 'bar-prog-70';
         task.status = 'doing';
+        task.actualEndDate = '';
       } else if (task.progress > 0) {
         task.barClass = 'bar-prog-30';
         task.status = 'doing';
+        task.actualEndDate = '';
       } else {
         task.barClass = 'bar-prog-0';
         task.status = 'todo';
+        task.actualEndDate = '';
       }
 
       const nowStr = new Date().toLocaleDateString('th-TH') + ' ' + new Date().toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
@@ -6665,11 +6669,11 @@
 
       if (ev.statusKey === 'delayed') {
         badgeEl.innerHTML = `<span style="color:#dc2626; background:#fef2f2; border:1px solid #fecaca; padding:3px 8px; border-radius:999px; font-size:11px; font-weight:700;"><i class="fa-solid fa-triangle-exclamation"></i> ล่าช้า ${ev.delayDays} วัน</span>`;
-      } else if (ev.statusKey === 'completed-late') {
-        badgeEl.innerHTML = `<span style="color:#b45309; background:#fffbeb; border:1px solid #fde68a; padding:3px 8px; border-radius:999px; font-size:11px; font-weight:700;"><i class="fa-solid fa-circle-check"></i> เสร็จล่าช้า (${ev.completedDelayDays} วัน)</span>`;
-      } else if (ev.statusKey === 'completed-on-time') {
-        badgeEl.innerHTML = `<span style="color:#15803d; background:#dcfce7; border:1px solid #bbf7d0; padding:3px 8px; border-radius:999px; font-size:11px; font-weight:700;"><i class="fa-solid fa-circle-check"></i> เสร็จตามแผน</span>`;
-      } else if (ev.statusKey === 'inprogress') {
+      } else if (ev.statusKey === 'completed_late') {
+        badgeEl.innerHTML = `<span style="color:#b45309; background:#fffbeb; border:1px solid #fde68a; padding:3px 8px; border-radius:999px; font-size:11px; font-weight:700;"><i class="fa-solid fa-circle-check"></i> เสร็จล่าช้า (${ev.delayDays} วัน)</span>`;
+      } else if (ev.statusKey === 'completed_ontime' || ev.statusKey === 'completed_no_date') {
+        badgeEl.innerHTML = `<span style="color:#15803d; background:#dcfce7; border:1px solid #bbf7d0; padding:3px 8px; border-radius:999px; font-size:11px; font-weight:700;"><i class="fa-solid fa-circle-check"></i> ${ev.statusKey === 'completed_ontime' ? 'เสร็จตามแผน' : 'เสร็จสิ้น'}</span>`;
+      } else if (ev.statusKey === 'doing') {
         badgeEl.innerHTML = `<span style="color:#0369a1; background:#e0f2fe; border:1px solid #bae6fd; padding:3px 8px; border-radius:999px; font-size:11px; font-weight:700;"><i class="fa-solid fa-rotate"></i> กำลังดำเนินการ</span>`;
       } else {
         badgeEl.innerHTML = `<span style="color:#475569; background:#f1f5f9; border:1px solid #cbd5e1; padding:3px 8px; border-radius:999px; font-size:11px; font-weight:700;"><i class="fa-regular fa-clock"></i> รอดำเนินการ</span>`;
@@ -9283,9 +9287,9 @@
                     const barCol = sc.isDelayed ? '#dc2626' : (sc.progress === 100 ? '#16a34a' : (sc.progress >= 70 ? '#22c55e' : (sc.progress > 0 ? '#f59e0b' : '#94a3b8')));
                     let stHtml = `<span class="badge-status" style="background:#f1f5f9;color:#475569;border:1px solid #cbd5e1;">รอดำเนินการ</span>`;
                     if (sc.statusKey === 'delayed') stHtml = `<span class="badge-status badge-delayed">ล่าช้า ${sc.delayDays} วัน</span>`;
-                    else if (sc.statusKey === 'completed-late') stHtml = `<span class="badge-status" style="background:#fffbeb;color:#b45309;border:1px solid #fde68a;">เสร็จล่าช้า (${sc.completedDelayDays} วัน)</span>`;
-                    else if (sc.statusKey === 'completed-on-time') stHtml = `<span class="badge-status badge-completed">เสร็จตามแผน</span>`;
-                    else if (sc.statusKey === 'inprogress') stHtml = `<span class="badge-status badge-inprogress">กำลังดำเนินการ</span>`;
+                    else if (sc.statusKey === 'completed_late') stHtml = `<span class="badge-status" style="background:#fffbeb;color:#b45309;border:1px solid #fde68a;">เสร็จล่าช้า (${sc.delayDays} วัน)</span>`;
+                    else if (sc.statusKey === 'completed_ontime' || sc.statusKey === 'completed_no_date') stHtml = `<span class="badge-status badge-completed">${sc.statusKey === 'completed_ontime' ? 'เสร็จตามแผน' : 'เสร็จสิ้น'}</span>`;
+                    else if (sc.statusKey === 'doing') stHtml = `<span class="badge-status badge-inprogress">กำลังดำเนินการ</span>`;
 
                     return `
                       <tr>
