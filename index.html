@@ -81,30 +81,37 @@
     .sidebar {
       width: 230px;
       min-width: 230px;
-      background: linear-gradient(180deg, #134e2c 0%, #165b35 60%, #114225 100%);
+      background:
+        radial-gradient(circle at 18% 6%, rgba(74, 222, 128, 0.18) 0%, transparent 32%),
+        radial-gradient(circle at 85% 92%, rgba(34, 197, 94, 0.22) 0%, transparent 38%),
+        linear-gradient(180deg, #0d3b22 0%, #0a2e1a 55%, #072213 100%);
       color: #ffffff;
       display: flex;
       flex-direction: column;
       position: sticky;
       top: 0;
       height: 100vh;
-      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.15);
+      box-shadow: 3px 0 14px rgba(0, 0, 0, 0.22);
       z-index: 100;
       user-select: none;
     }
 
     .sidebar-brand {
-      padding: 16px 18px;
+      padding: 18px 18px 16px;
       display: flex;
       align-items: center;
       gap: 12px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .brand-icon {
-      font-size: 26px;
-      color: #86efac;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 2px 8px rgba(134, 239, 172, 0.35));
     }
 
     .brand-info {
@@ -147,8 +154,8 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 9px 14px;
-      border-radius: 8px;
+      padding: 10px 14px;
+      border-radius: 14px;
       color: #e2e8f0;
       text-decoration: none;
       font-size: 13.5px;
@@ -172,44 +179,37 @@
     }
 
     .nav-item.active {
-      background: linear-gradient(90deg, #dcfce7 0%, #86efac 100%);
-      color: #14532d;
+      background: linear-gradient(90deg, #ecfccb 0%, #bef264 55%, #84cc16 100%);
+      color: #064e3b;
       font-weight: 700;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
-      border: 1px solid rgba(255, 255, 255, 0.45);
+      box-shadow: 0 4px 12px rgba(132, 204, 22, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.55);
     }
 
     .nav-item.active i {
-      color: #14532d;
+      color: #064e3b;
       opacity: 1;
     }
 
     .nav-item.active::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 7px;
-      bottom: 7px;
-      width: 4px;
-      background: #166534;
-      border-radius: 0 4px 4px 0;
+      display: none;
     }
 
     .sidebar-footer {
-      padding: 14px 18px 12px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 10px 14px 12px;
+      border-top: none;
       display: flex;
       flex-direction: column;
       align-items: center;
-      background: rgba(0, 0, 0, 0.15);
+      background: transparent;
       position: relative;
     }
 
     .sidebar-skyline {
       width: 100%;
-      height: 48px;
-      opacity: 0.35;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60"><path fill="%23ffffff" d="M10,60 L10,35 L25,35 L25,20 L40,20 L40,60 M45,60 L45,15 L65,15 L65,60 M70,60 L70,30 L85,30 L85,60 M90,60 L90,25 L115,25 L115,60 M120,60 L120,10 L140,10 L140,60 M145,60 L145,38 L160,38 L160,60 M165,60 L165,22 L185,22 L185,60"/><polygon fill="%23ffffff" points="135,10 135,0 138,0 138,10"/><line x1="100" y1="5" x2="170" y2="5" stroke="%23ffffff" stroke-width="2"/></svg>') no-repeat center bottom;
+      height: 82px;
+      opacity: 0.78;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 90"><g fill="none" stroke="%2386efac" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M58,88 L58,20 L66,20 L66,88"/><line x1="58" y1="30" x2="66" y2="38"/><line x1="66" y1="30" x2="58" y2="38"/><line x1="58" y1="42" x2="66" y2="50"/><line x1="66" y1="42" x2="58" y2="50"/><line x1="58" y1="54" x2="66" y2="62"/><line x1="66" y1="54" x2="58" y2="62"/><line x1="58" y1="66" x2="66" y2="74"/><line x1="66" y1="66" x2="58" y2="74"/><path d="M22,22 L138,22 L130,15 L30,15 Z"/><line x1="62" y1="6" x2="28" y2="15"/><line x1="62" y1="6" x2="122" y2="15"/><rect x="26" y="22" width="12" height="8" fill="%2386efac" fill-opacity="0.5"/><line x1="126" y1="22" x2="126" y2="48"/><path d="M123,48 Q126,53 129,48"/></g><g fill="%234ade80" fill-opacity="0.35" stroke="%2386efac" stroke-width="1"><rect x="10" y="62" width="16" height="26" rx="1"/><rect x="28" y="54" width="18" height="34" rx="1"/><rect x="92" y="66" width="16" height="22" rx="1"/><rect x="114" y="46" width="24" height="42" rx="1"/><rect x="142" y="56" width="26" height="32" rx="1"/><rect x="172" y="48" width="22" height="40" rx="1"/><rect x="196" y="64" width="16" height="24" rx="1"/></g><g fill="%23072213"><rect x="32" y="59" width="3" height="4"/><rect x="38" y="59" width="3" height="4"/><rect x="32" y="67" width="3" height="4"/><rect x="38" y="67" width="3" height="4"/><rect x="119" y="52" width="4" height="5"/><rect x="127" y="52" width="4" height="5"/><rect x="119" y="61" width="4" height="5"/><rect x="127" y="61" width="4" height="5"/><rect x="147" y="62" width="4" height="4"/><rect x="155" y="62" width="4" height="4"/><rect x="177" y="54" width="4" height="5"/><rect x="184" y="54" width="4" height="5"/></g></svg>') no-repeat center bottom;
       background-size: contain;
       margin-bottom: 4px;
     }
@@ -234,18 +234,17 @@
       overflow-x: hidden;
     }
 
-    /* TOP HEADER (2-Row Executive Layout) */
+    /* TOP HEADER (2-Row Executive Layout with Emerald Wave Banner) */
     .top-header {
-      background: linear-gradient(115deg, #ffffff 38%, #f0fdf4 72%, #dcfce7 100%);
-      padding: 12px 22px 10px;
+      background: #ffffff;
+      padding: 0;
       border-bottom: 1px solid #d1e7d8;
       display: flex;
       flex-direction: column;
-      gap: 10px;
       position: sticky;
       top: 0;
       z-index: 50;
-      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
     }
 
     .top-header-row-1 {
@@ -254,6 +253,12 @@
       justify-content: space-between;
       gap: 12px;
       width: 100%;
+      padding: 10px 22px;
+      background-color: #ffffff;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 90' preserveAspectRatio='none'><defs><linearGradient id='g1' x1='0' y1='0' x2='1' y2='0'><stop offset='0%25' stop-color='%23bbf7d0' stop-opacity='0.35'/><stop offset='45%25' stop-color='%2322c55e' stop-opacity='0.85'/><stop offset='100%25' stop-color='%23065f46' stop-opacity='1'/></linearGradient><linearGradient id='g2' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%234ade80' stop-opacity='0.45'/><stop offset='100%25' stop-color='%2315803d' stop-opacity='0.95'/></linearGradient></defs><path d='M320,90 C520,85 680,15 920,0 L1440,0 L1440,90 Z' fill='%23dcfce7' fill-opacity='0.65'/><path d='M480,90 C680,68 830,12 1080,0 L1440,0 L1440,90 Z' fill='url(%23g2)'/><path d='M640,90 C840,55 1020,8 1240,0 L1440,0 L1440,90 Z' fill='url(%23g1)'/><path d='M980,90 C1150,70 1300,32 1440,18 L1440,90 Z' fill='%23064e3b' fill-opacity='0.55'/></svg>");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: right center;
     }
 
     .top-header-row-2 {
@@ -263,6 +268,40 @@
       gap: 10px;
       width: 100%;
       flex-wrap: wrap;
+      padding: 8px 22px 10px;
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .header-search-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 999px;
+      padding: 6px 14px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      min-width: 190px;
+    }
+    .header-search-pill i {
+      color: #15803d;
+      font-size: 13px;
+    }
+    .header-search-pill input {
+      border: none;
+      outline: none;
+      background: transparent;
+      font-family: inherit;
+      font-size: 12.5px;
+      color: #1e293b;
+      width: 145px;
+    }
+    .header-search-pill input::placeholder {
+      color: #64748b;
+    }
+    @media (max-width: 960px) {
+      .header-search-pill { display: none; }
     }
 
     .header-left {
@@ -444,6 +483,44 @@
       font-weight: 600;
       font-size: 13.5px;
       color: #1e293b;
+    }
+
+    /* Header controls over emerald wave background */
+    .top-header-row-1 .live-clock-widget {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+    .top-header-row-1 .icon-btn {
+      background: #ffffff;
+      color: #166534;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    }
+    .top-header-row-1 .icon-btn:hover {
+      background: #f0fdf4;
+      color: #14532d;
+      transform: translateY(-1px);
+    }
+    .top-header-row-1 .user-profile:hover {
+      background: rgba(255, 255, 255, 0.16);
+    }
+    .top-header-row-1 .user-avatar {
+      background: #ffffff;
+      color: #166534;
+      border: 2px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    }
+    .top-header-row-1 .user-name {
+      color: #ffffff;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    }
+    .top-header-row-1 .role-badge {
+      background: rgba(255, 255, 255, 0.22) !important;
+      color: #ecfdf5 !important;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+    }
+    .top-header-row-1 .user-profile .fa-angle-down {
+      color: #ffffff !important;
     }
 
     /* CONTENT BODY */
@@ -771,6 +848,103 @@
     .gauge-sub {
       font-size: 11px;
       color: #475569;
+    }
+
+    /* Project Highlight Banner inside Bottom-Left Card */
+    .proj-highlight-banner {
+      position: relative;
+      height: 148px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #d1fae5;
+      background: linear-gradient(135deg, #f8fafc 0%, #ecfdf5 55%, #bbf7d0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .proj-highlight-banner:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(22, 101, 52, 0.14);
+    }
+    .proj-highlight-photo {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 62%;
+      height: 100%;
+      object-fit: cover;
+      mask-image: linear-gradient(90deg, #000 72%, transparent 100%);
+      -webkit-mask-image: linear-gradient(90deg, #000 72%, transparent 100%);
+    }
+    .proj-highlight-pill {
+      position: relative;
+      z-index: 2;
+      background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
+      color: #ffffff;
+      padding: 12px 18px 12px 16px;
+      border-radius: 999px 0 0 999px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 66%;
+      box-shadow: -4px 4px 14px rgba(20, 83, 45, 0.25);
+      border: 1.5px solid rgba(255, 255, 255, 0.45);
+      border-right: none;
+    }
+    .proj-highlight-pill-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .proj-highlight-pill-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      line-height: 1.25;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .proj-highlight-pill-sub {
+      font-size: 10.5px;
+      color: #dcfce7;
+      margin-top: 2px;
+    }
+    .proj-highlight-actions {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      z-index: 3;
+      display: flex;
+      gap: 4px;
+    }
+    .proj-highlight-change-btn {
+      background: rgba(15, 23, 42, 0.65);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      backdrop-filter: blur(4px);
+      transition: background 0.2s;
+    }
+    .proj-highlight-change-btn:hover {
+      background: rgba(22, 101, 52, 0.9);
     }
 
     /* ========================================================
@@ -1112,6 +1286,120 @@
     .bar-prog-30 { background: #facc15; color: #1e293b; }
     .bar-prog-0 { background: #cbd5e1; color: #475569; }
 
+    /* Overlay Progress Bar & Overdue Striped Bar (Gantt Enhancement) */
+    .gantt-plan-track {
+      position: absolute;
+      top: 5px;
+      bottom: 5px;
+      background: #CBD5E1;
+      border-radius: 6px;
+      z-index: 5;
+      cursor: pointer;
+      box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.08);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      transition: filter 0.2s ease;
+    }
+    .gantt-plan-track:hover {
+      filter: brightness(0.97);
+    }
+    .gantt-progress-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      border-radius: 6px;
+      transition: width 0.25s ease;
+      z-index: 1;
+    }
+    .gantt-progress-fill.prog-0 { background: #cbd5e1; }
+    .gantt-progress-fill.prog-warn { background: #facc15; }
+    .gantt-progress-fill.prog-good { background: #22c55e; }
+    .gantt-progress-fill.prog-done { background: #16a34a; }
+    .gantt-progress-fill.prog-delayed { background: #ef4444; }
+
+    .gantt-progress-label {
+      position: relative;
+      z-index: 2;
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 0 6px;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .gantt-bar-overdue {
+      position: absolute;
+      top: 6px;
+      bottom: 6px;
+      border-radius: 0 6px 6px 0;
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(239, 68, 68, 0.18),
+        rgba(239, 68, 68, 0.18) 5px,
+        rgba(239, 68, 68, 0.58) 5px,
+        rgba(239, 68, 68, 0.58) 10px
+      );
+      border: 1px solid #ef4444;
+      border-left: none;
+      z-index: 4;
+      pointer-events: none;
+    }
+    .gantt-delay-pill {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #fef2f2;
+      color: #dc2626;
+      border: 1px solid #fecaca;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 10px;
+      white-space: nowrap;
+      z-index: 8;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+      pointer-events: none;
+    }
+    .gantt-delay-pill.pill-done-late {
+      background: #fff7ed;
+      color: #c2410c;
+      border-color: #fed7aa;
+    }
+    .gantt-summary-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 8px 12px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 11.5px;
+    }
+    .gantt-summary-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 9px;
+      border-radius: 12px;
+      font-weight: 600;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      color: #334155;
+    }
+    .gantt-summary-chip.chip-delayed {
+      background: #fef2f2;
+      border-color: #fecaca;
+      color: #dc2626;
+      cursor: pointer;
+    }
+    .gantt-summary-chip.chip-delayed.active {
+      background: #dc2626;
+      color: #ffffff;
+      border-color: #dc2626;
+    }
+
     /* Today red marker line */
     .today-marker-line {
       position: absolute;
@@ -1390,34 +1678,122 @@
       border-color: #cbd5e1;
     }
 
-    /* Presentation Slide Deck */
+    /* Presentation Slide Deck (Polite Executive Theme) */
     .presentation-container {
-      background: #0f172a;
-      color: #ffffff;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      color: #1e293b;
       border-radius: var(--radius-lg);
-      padding: 30px;
-      min-height: 550px;
+      border: 1px solid #cbd5e1;
+      border-top: 5px solid #166534;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      min-height: 560px;
       display: flex;
       flex-direction: column;
       position: relative;
+      overflow: hidden;
     }
 
     .slide-content {
       flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
+      justify-content: flex-start;
+      align-items: stretch;
+      text-align: left;
+      padding: 24px 28px;
+      overflow-y: auto;
     }
 
     .slide-controls {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 12px 24px;
+      background: #f1f5f9;
+      border-top: 1px solid #e2e8f0;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pres-slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      border-bottom: 2px solid #e2e8f0;
+      flex-wrap: wrap;
+    }
+    .pres-slide-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f0fdf4;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .pres-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .pres-kpi-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    }
+    .pres-kpi-label {
+      font-size: 11.5px;
+      color: #64748b;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .pres-kpi-val {
+      font-size: 22px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.2;
+    }
+    .pres-table-wrap {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      overflow-x: auto;
+      max-height: 310px;
+      overflow-y: auto;
+    }
+    .pres-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+    .pres-table th {
+      background: #f8fafc;
+      color: #334155;
+      font-weight: 700;
+      padding: 9px 12px;
+      border-bottom: 1px solid #e2e8f0;
+      text-align: left;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    .pres-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+      vertical-align: middle;
+    }
+    .pres-table tr:last-child td {
+      border-bottom: none;
     }
 
     /* Modal System */
@@ -1949,7 +2325,36 @@
       }
     }
 
+    /* Executive Read-Only Dashboard Mode (?mode=exec) */
+    #header-exec-badge { display: none; }
+    body.exec-view-mode .sidebar,
+    body.exec-view-mode #mobile-menu-btn,
+    body.exec-view-mode #edit-mode-toggle-btn,
+    body.exec-view-mode #btn-share-exec-link,
+    body.exec-view-mode .proj-highlight-actions,
+    body.exec-view-mode .user-profile,
+    body.exec-view-mode a[onclick*="navigate('projects')"] {
+      display: none !important;
+    }
+    body.exec-view-mode #header-exec-badge {
+      display: inline-flex !important;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 10px;
+      background: #dcfce7;
+      border: 1px solid #86efac;
+      color: #166534;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    body.exec-view-mode .stat-card {
+      cursor: default;
+    }
+
     /* Print styling */
+    #print-all-slides-container { display: none; }
     @media print {
       .sidebar, .top-header, .toolbar-row, .btn, .time-toggles, .gantt-time-toggles, .filter-group, .card-expand-btn { display: none !important; }
       .main-wrapper { overflow: visible !important; height: auto !important; }
@@ -1957,6 +2362,23 @@
       .dashboard-card, .standard-card { box-shadow: none !important; border: 1px solid #ccc !important; }
       .print-doc-header { display: block !important; }
       .print-signature-section { display: grid !important; }
+      body.printing-slides #page-presentation > .standard-card,
+      body.printing-slides #presentation-fullscreen-box { display: none !important; }
+      body.printing-slides #print-all-slides-container { display: block !important; }
+      body.printing-slides .print-slide-page {
+        border: 1px solid #cbd5e1;
+        border-top: 5px solid #166534;
+        border-radius: 10px;
+        padding: 20px 24px;
+        margin-bottom: 16px;
+        background: #ffffff;
+        page-break-after: always;
+        break-after: page;
+      }
+      body.printing-slides .print-slide-page:last-child {
+        page-break-after: auto;
+        break-after: auto;
+      }
     }
   </style>
 </head>
@@ -2001,7 +2423,17 @@
   <aside class="sidebar" id="app-sidebar">
     <div class="sidebar-brand">
       <div class="brand-icon">
-        <i class="fa-solid fa-wheat-awn"></i>
+        <svg viewBox="0 0 44 44" width="38" height="38" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="leafGrad" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0%" stop-color="#22c55e"/>
+              <stop offset="100%" stop-color="#bef264"/>
+            </linearGradient>
+          </defs>
+          <path d="M10,36 C12,26 17,15 36,6 C34,24 26,33 14,33 C11,33 9,34 8,37" fill="url(#leafGrad)"/>
+          <path d="M9,36 C16,27 23,19 33,9" fill="none" stroke="#064e3b" stroke-width="2" stroke-linecap="round"/>
+          <path d="M18,27 L15,21 M23,22 L20,16 M22,23 L28,24" fill="none" stroke="#064e3b" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
       </div>
       <div class="brand-info">
         <span class="brand-title">Project Tracking</span>
@@ -2080,6 +2512,11 @@
         </div>
 
         <div class="header-right">
+          <div class="header-search-pill" title="ค้นหาโครงการอย่างรวดเร็ว">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="header-quick-search" placeholder="ค้นหาโครงการ..." oninput="onHeaderQuickSearch(this.value)">
+          </div>
+
           <div id="live-clock-widget" class="live-clock-widget" title="วัน-เวลาปัจจุบัน">
             <i class="fa-regular fa-clock"></i>
             <div class="live-clock-text">
@@ -2170,10 +2607,24 @@
           </div>
         </div>
 
-        <button id="edit-mode-toggle-btn" onclick="toggleEditModeLock()" title="คลิกเพื่อปลดล็อก/ล็อกโหมดแก้ไข" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 10px; border: 1px solid #cbd5e1; background: #ffffff; color: #475569; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; white-space: nowrap; box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);">
-          <i class="fa-solid fa-lock"></i>
-          <span>โหมดดูอย่างเดียว</span>
-        </button>
+        <div style="display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+          <div id="header-sync-pill" style="display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 10px; border: 1px solid #d1fae5; background: #f0fdf4; color: #166534; font-size: 11.5px; font-weight: 600; white-space: nowrap;">
+            <i class="fa-solid fa-cloud"></i>
+            <span id="header-sync-text">พร้อมใช้งาน</span>
+            <button type="button" onclick="syncFromGSheet(true)" title="ดึงข้อมูลล่าสุดจาก Google Sheets" style="border: none; background: #dcfce7; color: #166534; border-radius: 6px; padding: 2px 6px; cursor: pointer; font-size: 11px; font-family: inherit;">
+              <i class="fa-solid fa-arrows-rotate"></i>
+            </button>
+          </div>
+          <button id="btn-share-exec-link" type="button" onclick="copyExecutiveShareLink()" title="คัดลอกลิงก์หน้า Dashboard สำหรับผู้บริหาร (ดูอย่างเดียว)" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px; border-radius: 10px; border: 1px solid #bae6fd; background: #f0f9ff; color: #0369a1; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; white-space: nowrap;">
+            <i class="fa-solid fa-share-nodes"></i>
+            <span>แชร์ผู้บริหาร</span>
+          </button>
+          <span id="header-exec-badge"><i class="fa-solid fa-eye"></i> สำหรับผู้บริหาร (ดูอย่างเดียว)</span>
+          <button id="edit-mode-toggle-btn" onclick="toggleEditModeLock()" title="คลิกเพื่อปลดล็อก/ล็อกโหมดแก้ไข" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 10px; border: 1px solid #cbd5e1; background: #ffffff; color: #475569; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; white-space: nowrap; box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);">
+            <i class="fa-solid fa-lock"></i>
+            <span>โหมดดูอย่างเดียว</span>
+          </button>
+        </div>
       </div>
     </header>
 
@@ -2384,6 +2835,8 @@
                 </tbody>
               </table>
             </div>
+            <div id="dashboard-project-highlight-banner" style="margin-top: 14px;"></div>
+            <input type="file" id="proj-cover-upload-input" accept="image/*" style="display: none;" onchange="handleProjectCoverSelected(this)">
           </div>
 
           <!-- Card 2: Gantt Chart -->
@@ -2875,14 +3328,16 @@
           </div>
 
           <div class="slide-controls">
-            <button class="btn btn-outline" style="color: #fff; border-color: rgba(255,255,255,0.3);" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i> สไลด์ก่อนหน้า</button>
-            <span style="font-size: 13px; color: #94a3b8;" id="slide-counter">สไลด์ 1 / 5</span>
-            <div style="display: flex; gap: 8px;">
-              <button class="btn btn-outline" style="color: #fff; border-color: rgba(255,255,255,0.3);" onclick="togglePresentationFullscreen()"><i class="fa-solid fa-expand"></i> เต็มหน้าจอ</button>
+            <button class="btn btn-outline" style="color: #334155; border-color: #cbd5e1; background: #ffffff;" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i> สไลด์ก่อนหน้า</button>
+            <span style="font-size: 13px; color: #475569; font-weight: 600;" id="slide-counter">สไลด์ 1 / 5</span>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button class="btn btn-outline" style="color: #166534; border-color: #bbf7d0; background: #f0fdf4;" onclick="printAllPresentationSlides()"><i class="fa-solid fa-print"></i> พิมพ์สไลด์ทั้งหมด (PDF)</button>
+              <button class="btn btn-outline" style="color: #334155; border-color: #cbd5e1; background: #ffffff;" onclick="togglePresentationFullscreen()"><i class="fa-solid fa-expand"></i> เต็มหน้าจอ</button>
               <button class="btn btn-primary" onclick="nextSlide()">สไลด์ถัดไป <i class="fa-solid fa-chevron-right"></i></button>
             </div>
           </div>
         </div>
+        <div id="print-all-slides-container"></div>
       </section>
 
       <!-- ========================================================
@@ -3334,6 +3789,10 @@
             <input type="text" class="form-control" id="form-task-title" required placeholder="เช่น 1. จัดซื้อและเตรียมสารสกัดชีวภาพ">
           </div>
           <div class="form-group">
+            <label>รายละเอียดของหัวข้องาน / ขอบเขตงาน (Scope)</label>
+            <textarea class="form-control" id="form-task-description" rows="2" placeholder="ระบุรายละเอียด สิ่งที่ต้องดำเนินการ หรือเกณฑ์การตรวจรับของหัวข้องานนี้..."></textarea>
+          </div>
+          <div class="form-group">
             <label>สังกัดโครงการ <span style="color: red;">*</span></label>
             <select class="form-control" id="form-task-project" required></select>
           </div>
@@ -3411,6 +3870,10 @@
             <label>หัวข้อ / งาน</label>
             <input type="text" class="form-control" id="modal-task-title" required style="font-weight: 600; color: #1e293b;">
           </div>
+          <div class="form-group">
+            <label>รายละเอียดของหัวข้องาน / ขอบเขตงาน (Scope)</label>
+            <textarea class="form-control" id="modal-task-description" rows="2" placeholder="ระบุรายละเอียด สิ่งที่ต้องดำเนินการ หรือเกณฑ์การตรวจรับของหัวข้องานนี้..."></textarea>
+          </div>
 
           <!-- Progress Slider with Big Percentage Display -->
           <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 14px; text-align: center;">
@@ -3444,6 +3907,56 @@
               <label>ผู้รับผิดชอบงาน</label>
               <input type="text" class="form-control" id="modal-task-assignee" placeholder="ผู้รับผิดชอบงาน">
             </div>
+          </div>
+
+          <!-- Schedule, Delay Status & Plan End Date Extension -->
+          <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 6px;">
+              <span style="font-size: 12.5px; font-weight: 700; color: #1e3a29;">
+                <i class="fa-regular fa-calendar-check" style="color: var(--primary);"></i> กำหนดการและสถานะความล่าช้า
+              </span>
+              <span id="modal-task-schedule-badge" class="badge-status badge-planned">อยู่ในกำหนด</span>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label style="font-size: 12px;">วันเริ่มต้นตามแผน</label>
+                <input type="date" class="form-control" id="modal-task-start" onchange="refreshModalScheduleBadge()">
+              </div>
+              <div class="form-group">
+                <label style="font-size: 12px;">วันสิ้นสุดตามแผนเดิม (Baseline)</label>
+                <input type="date" class="form-control" id="modal-task-baseline-end" readonly style="background: #e2e8f0; color: #475569; cursor: not-allowed;">
+              </div>
+            </div>
+
+            <div class="form-row" style="margin-top: 8px;">
+              <div class="form-group">
+                <label style="font-size: 12px;">วันสิ้นสุดตามแผนปัจจุบัน (Current End)</label>
+                <input type="date" class="form-control" id="modal-task-end" oninput="onModalCurrentEndChange()" onchange="onModalCurrentEndChange()">
+              </div>
+              <div class="form-group" id="modal-actual-end-group">
+                <label style="font-size: 12px;">วันที่เสร็จจริง (Actual End Date) <span id="modal-actual-end-req" style="color: #dc2626; display: none;">*</span></label>
+                <input type="date" class="form-control" id="modal-task-actual-end" onchange="refreshModalScheduleBadge()">
+              </div>
+            </div>
+
+            <!-- Extension Reason Panel (Shown when Current End Date changes) -->
+            <div id="modal-extension-panel" style="display: none; margin-top: 10px; padding-top: 10px; border-top: 1px dashed #cbd5e1; background: #fffbeb; padding: 10px; border-radius: 6px; border: 1px solid #fde68a;">
+              <div style="font-size: 12px; font-weight: 700; color: #92400e; margin-bottom: 6px;">
+                <i class="fa-solid fa-clock-rotate-left"></i> บันทึกการปรับวันสิ้นสุดแผนงาน (<span id="modal-ext-days-preview">0 วัน</span>)
+              </div>
+              <div class="form-group" style="margin-bottom: 6px;">
+                <label style="font-size: 11.5px;">สาเหตุการขยาย/ปรับเวลา <span style="color: #dc2626;">*</span></label>
+                <input type="text" class="form-control" id="modal-task-ext-reason" placeholder="เช่น รอตรวจรับวัสดุจากต่างประเทศ, ปรับแก้แบบหน้างาน...">
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <label style="font-size: 11.5px;">หมายเหตุการปรับแผน</label>
+                <input type="text" class="form-control" id="modal-task-ext-notes" placeholder="รายละเอียดเพิ่มเติมหรือเลขที่หนังสืออนุมัติขยายเวลา...">
+              </div>
+            </div>
+
+            <!-- Extension History -->
+            <div id="modal-task-extension-history" style="margin-top: 8px; font-size: 11.5px; color: #475569;"></div>
           </div>
 
           <!-- Problems & Solutions -->
@@ -4073,16 +4586,129 @@
       }
     }
 
-    // Helper: Auto-calculate project status from dates and progress
+    // --- SCHEDULE & DELAY HELPERS (Asia/Bangkok) ---
+    function getBangkokTodayStr() {
+      try {
+        return new Intl.DateTimeFormat('en-CA', {
+          timeZone: 'Asia/Bangkok',
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        }).format(new Date());
+      } catch (e) {
+        const now = new Date();
+        return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+      }
+    }
+
+    function getBangkokTodayDate() {
+      return parseLocalDate(getBangkokTodayStr()) || new Date();
+    }
+
+    function calendarDiffDays(fromStr, toStr) {
+      const d1 = parseLocalDate(fromStr);
+      const d2 = parseLocalDate(toStr);
+      if (!d1 || !d2) return 0;
+      return Math.round((d2.getTime() - d1.getTime()) / 86400000);
+    }
+
+    function evaluateTaskSchedule(task, proj) {
+      const progress = Math.max(0, Math.min(100, parseInt(task && task.progress, 10) || 0));
+      const remainingPct = Math.max(0, 100 - progress);
+      const currentEnd = (task && (task.endDate || task.dueDate)) || (proj && proj.endDate) || '';
+      const baselineEnd = (task && task.baselineEndDate) || currentEnd;
+      const actualEnd = (task && task.actualEndDate) || '';
+      const todayStr = getBangkokTodayStr();
+      const isExtended = !!(baselineEnd && currentEnd && baselineEnd !== currentEnd);
+
+      if (progress >= 100) {
+        if (!actualEnd) {
+          return {
+            progress: 100,
+            remainingPct: 0,
+            baselineEnd,
+            currentEnd,
+            actualEnd: '',
+            isExtended,
+            isDelayed: false,
+            isCompletedLate: false,
+            needsActualEndDate: true,
+            delayDays: 0,
+            statusKey: 'completed_no_date',
+            statusLabel: 'เสร็จสิ้น (รอบันทึกวันที่เสร็จจริง)',
+            overdueEndStr: ''
+          };
+        }
+        const lateDays = currentEnd ? Math.max(0, calendarDiffDays(currentEnd, actualEnd)) : 0;
+        const isCompletedLate = lateDays > 0;
+        return {
+          progress: 100,
+          remainingPct: 0,
+          baselineEnd,
+          currentEnd,
+          actualEnd,
+          isExtended,
+          isDelayed: false,
+          isCompletedLate,
+          needsActualEndDate: false,
+          delayDays: lateDays,
+          statusKey: isCompletedLate ? 'completed_late' : 'completed_ontime',
+          statusLabel: isCompletedLate ? `เสร็จล่าช้า (${lateDays} วัน)` : 'เสร็จตามแผน',
+          overdueEndStr: isCompletedLate ? actualEnd : ''
+        };
+      }
+
+      const delayDays = currentEnd ? Math.max(0, calendarDiffDays(currentEnd, todayStr)) : 0;
+      const isDelayed = delayDays > 0;
+
+      if (isDelayed) {
+        return {
+          progress,
+          remainingPct,
+          baselineEnd,
+          currentEnd,
+          actualEnd,
+          isExtended,
+          isDelayed: true,
+          isCompletedLate: false,
+          needsActualEndDate: false,
+          delayDays,
+          statusKey: 'delayed',
+          statusLabel: `ล่าช้า ${delayDays} วัน`,
+          overdueEndStr: todayStr
+        };
+      }
+
+      return {
+        progress,
+        remainingPct,
+        baselineEnd,
+        currentEnd,
+        actualEnd,
+        isExtended,
+        isDelayed: false,
+        isCompletedLate: false,
+        needsActualEndDate: false,
+        delayDays: 0,
+        statusKey: progress > 0 ? 'doing' : 'todo',
+        statusLabel: progress > 0 ? 'กำลังดำเนินการ' : 'รอดำเนินการ',
+        overdueEndStr: ''
+      };
+    }
+
+    // Helper: Auto-calculate project status from dates, tasks, and progress
     function evaluateProjectStatus(proj) {
       if (proj.status === 'cancelled') return 'cancelled';
       if (proj.status === 'pending') return 'pending';
       if (proj.progress === 100) return 'completed';
       
-      const today = new Date().toISOString().split('T')[0];
-      const next7Days = new Date(Date.now() + 7 * 86400000).toISOString().split('T')[0];
+      const today = getBangkokTodayStr();
+      const todayD = parseLocalDate(today);
+      const next7D = new Date(todayD.getFullYear(), todayD.getMonth(), todayD.getDate() + 7);
+      const next7Days = `${next7D.getFullYear()}-${String(next7D.getMonth() + 1).padStart(2, '0')}-${String(next7D.getDate()).padStart(2, '0')}`;
 
-      if (proj.endDate && proj.endDate < today) {
+      const hasDelayedTask = Array.isArray(proj.tasks) && proj.tasks.some(t => evaluateTaskSchedule(t, proj).isDelayed);
+      if ((proj.endDate && proj.endDate < today) || hasDelayedTask) {
         return 'delayed';
       }
       if (proj.endDate && proj.endDate <= next7Days && proj.endDate >= today) {
@@ -4125,6 +4751,7 @@
 
     function getProjectDateBounds(proj, tasks) {
       const dates = [];
+      const today = getBangkokTodayDate();
       if (proj) {
         const ps = parseLocalDate(proj.startDate);
         const pe = parseLocalDate(proj.endDate);
@@ -4133,12 +4760,15 @@
       }
       (tasks || []).forEach(t => {
         const ts = parseLocalDate(t.startDate);
-        const te = parseLocalDate(t.endDate);
+        const te = parseLocalDate(t.endDate || t.dueDate);
         if (ts) dates.push(ts);
         if (te) dates.push(te);
+        const sched = evaluateTaskSchedule(t, proj);
+        if (sched.overdueEndStr) {
+          const oe = parseLocalDate(sched.overdueEndStr);
+          if (oe) dates.push(oe);
+        }
       });
-      const now = new Date();
-      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
       if (dates.length === 0) {
         return {
           minDate: new Date(today.getFullYear(), today.getMonth(), 1),
@@ -4892,8 +5522,10 @@
       if (!sampleTbody) return;
       sampleTbody.innerHTML = '';
 
+      const bannerEl = document.getElementById('dashboard-project-highlight-banner');
       const projects = projectsList || appState.projects || [];
       if (projects.length === 0) {
+        if (bannerEl) bannerEl.innerHTML = '';
         sampleTbody.innerHTML = `
           <tr>
             <td colspan="3" style="text-align: center; padding: 35px 20px; color: #94a3b8;">
@@ -4938,6 +5570,99 @@
           </tr>
         `;
       });
+
+      if (bannerEl) {
+        const featuredProj = (selectedProjId !== 'all'
+          ? projects.find(p => p.id === parseInt(selectedProjId, 10))
+          : null) || sampleProjects[0];
+
+        if (featuredProj) {
+          let latestPhotoUrl = '';
+          for (const t of (featuredProj.tasks || [])) {
+            if (t.photos && t.photos.length > 0) {
+              latestPhotoUrl = t.photos[t.photos.length - 1].url || '';
+              if (latestPhotoUrl) break;
+            }
+            if (!latestPhotoUrl && t.evidenceImage) {
+              latestPhotoUrl = t.evidenceImage;
+            }
+          }
+
+          const fallbackSvg = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 160'><rect width='360' height='160' fill='%23f1f5f9'/><rect x='24' y='18' width='170' height='142' rx='6' fill='%23e2e8f0' stroke='%23cbd5e1' stroke-width='2'/><rect x='46' y='34' width='126' height='116' rx='4' fill='%23cbd5e1'/><rect x='54' y='40' width='53' height='110' fill='%2394a3b8'/><rect x='111' y='40' width='53' height='110' fill='%2364748b'/><rect x='92' y='21' width='34' height='10' rx='3' fill='%231e293b'/><polygon points='109,23 105,29 113,29' fill='%234ade80'/><rect x='204' y='74' width='18' height='30' rx='3' fill='%23e2e8f0' stroke='%23cbd5e1'/><circle cx='213' cy='84' r='3' fill='%2322c55e'/><circle cx='213' cy='94' r='3' fill='%2394a3b8'/></svg>`;
+          const displayImg = featuredProj.coverImage || latestPhotoUrl || fallbackSvg;
+          const imgLabel = featuredProj.coverImage ? 'ภาพหน้าปกโครงการ • ' : (latestPhotoUrl ? 'ภาพถ่ายหน้างานล่าสุด • ' : '');
+
+          bannerEl.innerHTML = `
+            <div class="proj-highlight-banner" onclick="viewProjectTasks(${featuredProj.id})" title="คลิกเพื่อดูรายละเอียดและงานย่อยของโครงการ ${featuredProj.name}">
+              <div class="proj-highlight-actions">
+                <button type="button" class="proj-highlight-change-btn" onclick="event.stopPropagation(); triggerProjectCoverUpload(${featuredProj.id})" title="เปลี่ยนรูปหน้าปกโครงการ">
+                  <i class="fa-solid fa-camera"></i> เปลี่ยนรูป
+                </button>
+                ${featuredProj.coverImage ? `<button type="button" class="proj-highlight-change-btn" onclick="event.stopPropagation(); clearProjectCoverImage(${featuredProj.id})" title="กลับไปใช้ภาพถ่ายหน้างานล่าสุดอัตโนมัติ"><i class="fa-solid fa-rotate-left"></i></button>` : ''}
+              </div>
+              <img class="proj-highlight-photo" src="${displayImg}" alt="${featuredProj.name}">
+              <div class="proj-highlight-pill">
+                <div class="proj-highlight-pill-icon">
+                  <i class="fa-solid ${featuredProj.icon || 'fa-gears'}"></i>
+                </div>
+                <div style="min-width:0;">
+                  <div class="proj-highlight-pill-title">${featuredProj.name}</div>
+                  <div class="proj-highlight-pill-sub">${imgLabel}คืบหน้า ${featuredProj.progress || 0}%</div>
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          bannerEl.innerHTML = '';
+        }
+      }
+    }
+
+    let pendingCoverProjId = null;
+
+    function triggerProjectCoverUpload(projId) {
+      pendingCoverProjId = projId;
+      const input = document.getElementById('proj-cover-upload-input');
+      if (input) {
+        input.value = '';
+        input.click();
+      }
+    }
+
+    function handleProjectCoverSelected(input) {
+      if (!input.files || !input.files[0] || !pendingCoverProjId) return;
+      const file = input.files[0];
+      const proj = (appState.projects || []).find(p => p.id === pendingCoverProjId);
+      if (!proj) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const maxW = 900;
+          const scale = img.width > maxW ? (maxW / img.width) : 1;
+          const canvas = document.createElement('canvas');
+          canvas.width = Math.round(img.width * scale);
+          canvas.height = Math.round(img.height * scale);
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          proj.coverImage = canvas.toDataURL('image/jpeg', 0.82);
+          saveState();
+          renderSampleTable(document.getElementById('filter-project')?.value || 'all');
+          showToast('เปลี่ยนรูปภาพโครงการเรียบร้อยแล้ว', 'success');
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function clearProjectCoverImage(projId) {
+      const proj = (appState.projects || []).find(p => p.id === projId);
+      if (!proj) return;
+      delete proj.coverImage;
+      saveState();
+      renderSampleTable(document.getElementById('filter-project')?.value || 'all');
+      showToast('กลับไปใช้ภาพถ่ายหน้างานล่าสุดอัตโนมัติแล้ว', 'info');
     }
 
     function selectProjectFromTable(projId) {
@@ -4948,7 +5673,59 @@
       }
     }
 
+    function onHeaderQuickSearch(query) {
+      const projSelect = document.getElementById('filter-project');
+      if (!projSelect) return;
+      const q = (query || '').trim().toLowerCase();
+      if (!q) {
+        if (projSelect.value !== 'all') {
+          projSelect.value = 'all';
+          applyFilters();
+        }
+        return;
+      }
+      const match = (appState.projects || []).find(p =>
+        (p.name || '').toLowerCase().includes(q) ||
+        (p.code || '').toLowerCase().includes(q) ||
+        (p.department || '').toLowerCase().includes(q)
+      );
+      if (match && projSelect.value !== match.id.toString()) {
+        projSelect.value = match.id.toString();
+        applyFilters();
+      }
+    }
+
     // --- 4. GANTT CHART RENDERING (DASHBOARD) ---
+    let ganttFilterDelayedOnly = false;
+
+    function sortProjectTasksByDate(tasks) {
+      if (!Array.isArray(tasks)) return tasks;
+      return tasks.sort((a, b) => {
+        const aStart = (a.startDate || '').trim();
+        const bStart = (b.startDate || '').trim();
+        if (aStart && bStart && aStart !== bStart) {
+          return aStart.localeCompare(bStart);
+        }
+        if (aStart && !bStart) return -1;
+        if (!aStart && bStart) return 1;
+
+        const aEnd = (a.endDate || a.dueDate || '').trim();
+        const bEnd = (b.endDate || b.dueDate || '').trim();
+        if (aEnd && bEnd && aEnd !== bEnd) {
+          return aEnd.localeCompare(bEnd);
+        }
+        if (aEnd && !bEnd) return -1;
+        if (!aEnd && bEnd) return 1;
+
+        return (a.id || 0) - (b.id || 0);
+      });
+    }
+
+    function toggleGanttDelayedFilter() {
+      ganttFilterDelayedOnly = !ganttFilterDelayedOnly;
+      renderGanttDashboard();
+    }
+
     function renderGanttDashboard(projectsList = null) {
       const wrapper = document.getElementById('gantt-wrapper');
       if (!wrapper) return;
@@ -4977,14 +5754,14 @@
       }
       if (!activeProj) activeProj = projects[0];
 
-      const tasksList = activeProj.tasks || [];
-      const scaleConfig = getDynamicTimeline(currentGanttScale, activeProj, tasksList);
+      const allTasks = sortProjectTasksByDate(activeProj.tasks || []);
+      const scaleConfig = getDynamicTimeline(currentGanttScale, activeProj, allTasks);
 
       if (titleElem && activeProj) {
         titleElem.textContent = `Gantt Chart : ${activeProj.name} (${scaleConfig.unit})`;
       }
 
-      if (tasksList.length === 0) {
+      if (allTasks.length === 0) {
         wrapper.innerHTML = `
           <div style="text-align: center; padding: 45px 20px; color: #94a3b8;">
             <i class="fa-solid fa-list-check" style="font-size: 36px; color: #cbd5e1; display: block; margin-bottom: 10px;"></i>
@@ -4998,8 +5775,37 @@
         return;
       }
 
+      // Compute task-level schedule summary (no double counting)
+      let cntDone = 0, cntDoing = 0, cntDelayed = 0, cntTodo = 0;
+      allTasks.forEach(t => {
+        const sc = evaluateTaskSchedule(t, activeProj);
+        if (sc.progress >= 100) cntDone++;
+        else if (sc.isDelayed) cntDelayed++;
+        else if (sc.progress > 0) cntDoing++;
+        else cntTodo++;
+      });
+
+      const tasksList = ganttFilterDelayedOnly
+        ? allTasks.filter(t => evaluateTaskSchedule(t, activeProj).isDelayed)
+        : allTasks;
+
+      let summaryHtml = `
+        <div class="gantt-summary-strip">
+          <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+            <span class="gantt-summary-chip"><i class="fa-solid fa-list-ul"></i> ทั้งหมด ${allTasks.length} งาน</span>
+            <span class="gantt-summary-chip" style="color: #166534; background: #f0fdf4; border-color: #bbf7d0;"><i class="fa-solid fa-circle-check"></i> เสร็จแล้ว ${cntDone}</span>
+            <span class="gantt-summary-chip" style="color: #0369a1; background: #f0f9ff; border-color: #bae6fd;"><i class="fa-solid fa-spinner"></i> กำลังทำ ${cntDoing}</span>
+            <span class="gantt-summary-chip" style="color: #475569;"><i class="fa-regular fa-clock"></i> ยังไม่เริ่ม ${cntTodo}</span>
+            <button type="button" class="gantt-summary-chip chip-delayed ${ganttFilterDelayedOnly ? 'active' : ''}" onclick="toggleGanttDelayedFilter()" title="คลิกเพื่อกรองเฉพาะงานที่ล่าช้า">
+              <i class="fa-solid fa-triangle-exclamation"></i> ล่าช้า ${cntDelayed} ${ganttFilterDelayedOnly ? '(กำลังกรอง)' : ''}
+            </button>
+          </div>
+          <div style="font-weight: 700; color: #14532d;">ความคืบหน้ารวม: ${activeProj.progress || 0}%</div>
+        </div>
+      `;
+
       // Generate HTML Table
-      let tableHtml = `<table class="gantt-table"><thead><tr>`;
+      let tableHtml = summaryHtml + `<table class="gantt-table"><thead><tr>`;
       tableHtml += `<th rowspan="2" class="num-th">ลำดับ</th>`;
       tableHtml += `<th rowspan="2" class="task-header-th">หัวข้อ/งาน</th>`;
 
@@ -5017,14 +5823,19 @@
       });
       tableHtml += `</tr></thead><tbody>`;
 
+      if (tasksList.length === 0) {
+        tableHtml += `<tr><td colspan="${scaleConfig.columns.length + 2}" style="text-align:center; padding: 24px; color:#64748b;">ไม่มีงานที่ล่าช้าในขณะนี้ <button class="btn btn-outline" style="margin-left:8px; padding:2px 8px; font-size:11px;" onclick="toggleGanttDelayedFilter()">แสดงทั้งหมด</button></td></tr>`;
+      }
+
       // Rows
       const totalCols = scaleConfig.columns.length;
       tasksList.forEach((task, tIndex) => {
+        const sched = evaluateTaskSchedule(task, activeProj);
         let startCol = -1;
         let endCol = -1;
 
         const tStart = parseLocalDate(task.startDate) || parseLocalDate(activeProj.startDate);
-        const tEnd = parseLocalDate(task.endDate) || tStart;
+        const tEnd = parseLocalDate(sched.currentEnd) || tStart;
 
         if (tStart && tEnd) {
           const tEndInclusive = new Date(tEnd.getFullYear(), tEnd.getMonth(), tEnd.getDate(), 23, 59, 59);
@@ -5041,17 +5852,49 @@
           endCol = Math.min(totalCols - 1, startCol + 1);
         }
 
-        let barClass = 'bar-prog-0';
-        if (task.progress === 100) barClass = 'bar-complete';
-        else if (task.progress >= 60) barClass = 'bar-prog-70';
-        else if (task.progress > 0) barClass = 'bar-prog-30';
+        // Compute overdue striped bar end column (starts after endCol, ends at today or actualEndDate)
+        let overdueEndCol = -1;
+        if (sched.delayDays > 0 && sched.overdueEndStr) {
+          const oEnd = parseLocalDate(sched.overdueEndStr);
+          if (oEnd) {
+            const oEndInc = new Date(oEnd.getFullYear(), oEnd.getMonth(), oEnd.getDate(), 23, 59, 59);
+            scaleConfig.colRanges.forEach((rng, idx) => {
+              if (idx > endCol && rng.start <= oEndInc) {
+                overdueEndCol = idx;
+              }
+            });
+          }
+        }
+
+        // Overlay progress fill color class per Section 2.2
+        const pct = sched.progress;
+        let fillClass = 'prog-0';
+        let labelColor = '#475569';
+        if (sched.isDelayed) {
+          fillClass = 'prog-delayed';
+          labelColor = pct >= 18 ? '#ffffff' : '#991b1b';
+        } else if (pct === 100) {
+          fillClass = 'prog-done';
+          labelColor = '#ffffff';
+        } else if (pct >= 70) {
+          fillClass = 'prog-good';
+          labelColor = pct >= 18 ? '#ffffff' : '#14532d';
+        } else if (pct > 0) {
+          fillClass = 'prog-warn';
+          labelColor = '#1e293b';
+        }
+
+        const extBadge = sched.isExtended ? `<span title="ขยายเวลาจาก ${sched.baselineEnd} เป็น ${sched.currentEnd}" style="font-size:9.5px;background:#fef3c7;color:#92400e;border:1px solid #fde68a;padding:0 4px;border-radius:4px;margin-left:4px;flex-shrink:0;">ขยายเวลา</span>` : '';
+        const alertIcon = sched.isDelayed ? `<i class="fa-solid fa-triangle-exclamation" style="color:#dc2626;margin-right:4px;" title="${sched.statusLabel}"></i>` : '';
+        const descHint = task.description ? ` | รายละเอียด: ${task.description.replace(/"/g, '&quot;')}` : '';
+        const tooltipText = `${task.title}${descHint} | แผน: ${task.startDate || '-'} ถึง ${sched.currentEnd || '-'} | คืบหน้าจริง: ${pct}% (เหลือ ${sched.remainingPct}%) | สถานะ: ${sched.statusLabel}`;
 
         tableHtml += `<tr class="gantt-task-row">`;
         tableHtml += `<td style="text-align: center; font-weight: 600; color: #64748b;">${tIndex + 1}</td>`;
         tableHtml += `<td>
-          <div class="gantt-task-title" onclick="openUpdateTaskModal(${task.id}, ${activeProj.id})" style="cursor: pointer; display: flex; align-items: center; justify-content: space-between;" title="คลิกเพื่ออัปเดตความคืบหน้า">
-            <span>${task.title}</span>
-            <i class="fa-regular fa-pen-to-square" style="font-size: 11px; color: var(--primary); opacity: 0.75; margin-left: 6px;"></i>
+          <div class="gantt-task-title" onclick="openUpdateTaskModal(${task.id}, ${activeProj.id})" style="cursor: pointer; display: flex; align-items: center; justify-content: space-between;" title="${tooltipText}">
+            <span style="overflow:hidden;text-overflow:ellipsis;">${alertIcon}${task.title}</span>
+            ${extBadge ? `<span style="display:inline-flex;align-items:center;flex-shrink:0;">${extBadge}</span>` : ''}
           </div>
         </td>`;
 
@@ -5061,11 +5904,28 @@
           if (c === startCol) {
             const spanCount = Math.max(1, (endCol - startCol) + 1);
             const barWidth = spanCount * 100;
+            const trackRadius = overdueEndCol > endCol ? 'border-radius: 6px 0 0 6px;' : '';
             tableHtml += `
-              <div class="gantt-bar-item ${barClass}" onclick="openUpdateTaskModal(${task.id}, ${activeProj.id})" style="left: 4px; width: calc(${barWidth}% - 8px); cursor: pointer;" title="คลิกเพื่ออัปเดตความคืบหน้า: ${task.title} (${task.progress}%)">
-                ${task.progress}%
+              <div class="gantt-plan-track" onclick="openUpdateTaskModal(${task.id}, ${activeProj.id})" style="left: 4px; width: calc(${barWidth}% - 8px); ${trackRadius}" title="${tooltipText}">
+                <div class="gantt-progress-fill ${fillClass}" style="width: ${pct}%;"></div>
+                <span class="gantt-progress-label" style="color: ${labelColor};">${pct}%</span>
               </div>
             `;
+          }
+
+          if (overdueEndCol > endCol && c === endCol + 1) {
+            const overdueSpan = overdueEndCol - endCol;
+            const overdueWidth = overdueSpan * 100;
+            const pillText = sched.isCompletedLate ? `เสร็จล่าช้า ${sched.delayDays} วัน` : `⚠ ล่าช้า ${sched.delayDays} วัน`;
+            const pillClass = sched.isCompletedLate ? 'gantt-delay-pill pill-done-late' : 'gantt-delay-pill';
+            tableHtml += `
+              <div class="gantt-bar-overdue" style="left: -4px; width: calc(${overdueWidth}% + 0px);" title="${sched.statusLabel}"></div>
+              <span class="${pillClass}" style="left: calc(${overdueWidth}% + 4px);">${pillText}</span>
+            `;
+          } else if (sched.delayDays > 0 && overdueEndCol <= endCol && c === endCol) {
+            const pillText = sched.isCompletedLate ? `เสร็จล่าช้า ${sched.delayDays} วัน` : `⚠ ล่าช้า ${sched.delayDays} วัน`;
+            const pillClass = sched.isCompletedLate ? 'gantt-delay-pill pill-done-late' : 'gantt-delay-pill';
+            tableHtml += `<span class="${pillClass}" style="left: calc(100% + 4px);">${pillText}</span>`;
           }
 
           if (c === scaleConfig.todayCol) {
@@ -5089,11 +5949,14 @@
     // Render Notifications (Bell badge & popup modal list)
     function renderNotifications() {
       const notifBadge = document.getElementById('notification-badge');
+      const unreadCountEl = document.getElementById('unread-count');
       const notifList = document.getElementById('notification-modal-list');
       
       const alerts = [];
-      const todayStr = new Date().toISOString().split('T')[0];
-      const next7Days = new Date(Date.now() + 7 * 86400000).toISOString().split('T')[0];
+      const todayStr = getBangkokTodayStr();
+      const todayD = parseLocalDate(todayStr);
+      const next7D = new Date(todayD.getFullYear(), todayD.getMonth(), todayD.getDate() + 7);
+      const next7Days = `${next7D.getFullYear()}-${String(next7D.getMonth() + 1).padStart(2, '0')}-${String(next7D.getDate()).padStart(2, '0')}`;
 
       (appState.projects || []).forEach(p => {
         if (p.status === 'delayed') {
@@ -5102,14 +5965,24 @@
             icon: 'fa-triangle-exclamation',
             color: '#dc2626',
             title: `โครงการล่าช้า: ${p.name}`,
-            desc: `กำหนดเสร็จ ${p.endDate} ปัจจุบันคืบหน้า ${p.progress}%`,
+            desc: `กำหนดเสร็จ ${p.endDate || '-'} ปัจจุบันคืบหน้า ${p.progress || 0}%`,
             action: () => viewProjectTasks(p.id)
           });
         }
         if (p.tasks) {
           p.tasks.forEach(t => {
-            if (t.progress < 100 && t.endDate) {
-              if (t.endDate === todayStr) {
+            const sched = evaluateTaskSchedule(t, p);
+            if (sched.isDelayed) {
+              alerts.push({
+                type: 'delayed',
+                icon: 'fa-triangle-exclamation',
+                color: '#dc2626',
+                title: `งานล่าช้า ${sched.delayDays} วัน: ${t.title}`,
+                desc: `โครงการ: ${p.name} | กำหนดเสร็จ ${sched.currentEnd} | คืบหน้า ${sched.progress}%`,
+                action: () => openUpdateTaskModal(t.id, p.id)
+              });
+            } else if (sched.progress < 100 && sched.currentEnd) {
+              if (sched.currentEnd === todayStr) {
                 alerts.push({
                   type: 'duetoday',
                   icon: 'fa-clock',
@@ -5118,13 +5991,13 @@
                   desc: `โครงการ: ${p.name} (ผู้รับผิดชอบ: ${t.assignee || p.manager})`,
                   action: () => openUpdateTaskModal(t.id, p.id)
                 });
-              } else if (t.endDate > todayStr && t.endDate <= next7Days) {
+              } else if (sched.currentEnd > todayStr && sched.currentEnd <= next7Days) {
                 alerts.push({
                   type: 'duesoon',
                   icon: 'fa-bell',
                   color: '#0284c7',
                   title: `งานใกล้ครบกำหนด (&le;7 วัน): ${t.title}`,
-                  desc: `กำหนดส่ง: ${t.endDate} (${p.name})`,
+                  desc: `กำหนดส่ง: ${sched.currentEnd} (${p.name})`,
                   action: () => openUpdateTaskModal(t.id, p.id)
                 });
               }
@@ -5136,6 +6009,9 @@
       if (notifBadge) {
         notifBadge.textContent = alerts.length;
         notifBadge.style.display = alerts.length > 0 ? 'inline-block' : 'none';
+      }
+      if (unreadCountEl) {
+        unreadCountEl.textContent = alerts.length;
       }
 
       if (notifList) {
@@ -5217,7 +6093,7 @@
       }
 
       const activeProj = appState.projects.find(p => p.id === currentTasksProject) || appState.projects[0];
-      const tasksList = activeProj.tasks || [];
+      const tasksList = sortProjectTasksByDate(activeProj.tasks || []);
 
       // Calculate KPI metrics
       const totalTasks = tasksList.length;
@@ -5257,16 +6133,22 @@
       // Render Task Table Rows
       tbody.innerHTML = '';
       tasksList.forEach((task, idx) => {
+        const sched = evaluateTaskSchedule(task, activeProj);
         let statusBadge = '';
-        if (task.progress === 100) {
-          statusBadge = `<span class="badge-status badge-completed"><i class="fa-solid fa-circle-check"></i> เสร็จสิ้น</span>`;
-        } else if (task.progress > 0) {
+        if (sched.statusKey === 'delayed') {
+          statusBadge = `<span class="badge-status badge-delayed"><i class="fa-solid fa-triangle-exclamation"></i> ล่าช้า ${sched.delayDays} วัน</span>`;
+        } else if (sched.statusKey === 'completed-late') {
+          statusBadge = `<span class="badge-status" style="background:#fffbeb; color:#b45309; border:1px solid #fde68a;"><i class="fa-solid fa-circle-check"></i> เสร็จล่าช้า (${sched.completedDelayDays} วัน)</span>`;
+        } else if (sched.statusKey === 'completed-on-time') {
+          statusBadge = `<span class="badge-status badge-completed"><i class="fa-solid fa-circle-check"></i> เสร็จตามแผน</span>`;
+        } else if (sched.statusKey === 'inprogress') {
           statusBadge = `<span class="badge-status badge-inprogress"><i class="fa-solid fa-rotate"></i> กำลังดำเนินการ</span>`;
         } else {
           statusBadge = `<span class="badge-status" style="background:#f1f5f9; color:#64748b; border:1px solid #cbd5e1;"><i class="fa-regular fa-clock"></i> รอดำเนินการ</span>`;
         }
 
-        const progColor = task.progress === 100 ? '#16a34a' : (task.progress >= 60 ? '#84cc16' : (task.progress > 0 ? '#f59e0b' : '#94a3b8'));
+        const progColor = sched.isDelayed ? '#dc2626' : (task.progress === 100 ? '#16a34a' : (task.progress >= 70 ? '#22c55e' : (task.progress > 0 ? '#f59e0b' : '#94a3b8')));
+        const extBadge = sched.isExtended ? `<span style="font-size:10px; background:#fef3c7; color:#b45309; border:1px solid #fde68a; padding:1px 5px; border-radius:4px;" title="แผนเดิม: ${sched.baselineEndDate}">ขยายเวลา (เดิม ${sched.baselineEndDate})</span>` : '';
 
         let problemBadge = '';
         if (task.consultation && task.consultation.needed) {
@@ -5296,8 +6178,10 @@
                   ${problemBadge}
                   ${evidenceIcon}
                 </div>
-                <div style="font-size: 11px; color: var(--text-muted); font-weight: 400;">
-                  <i class="fa-regular fa-user"></i> ${task.assignee || 'ผู้รับผิดชอบ'} | <i class="fa-regular fa-calendar"></i> ${task.startDate || '-'} ถึง ${task.endDate || '-'}
+                ${task.description ? `<div style="font-size: 11.5px; color: #475569; font-weight: 400; line-height: 1.4; max-width: 520px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${task.description.replace(/"/g, '&quot;')}"><i class="fa-regular fa-file-lines" style="color: #94a3b8; margin-right: 4px;"></i>${task.description}</div>` : ''}
+                <div style="font-size: 11px; color: var(--text-muted); font-weight: 400; display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+                  <span><i class="fa-regular fa-user"></i> ${task.assignee || 'ผู้รับผิดชอบ'} | <i class="fa-regular fa-calendar"></i> ${task.startDate || '-'} ถึง ${task.endDate || '-'}</span>
+                  ${extBadge}
                 </div>
               </div>
             </td>
@@ -5422,6 +6306,7 @@
       const problems = document.getElementById('form-task-problems') ? document.getElementById('form-task-problems').value.trim() : '';
       const solutions = document.getElementById('form-task-solutions') ? document.getElementById('form-task-solutions').value.trim() : '';
       const notes = document.getElementById('form-task-notes') ? document.getElementById('form-task-notes').value.trim() : '';
+      const description = document.getElementById('form-task-description') ? document.getElementById('form-task-description').value.trim() : '';
 
       const newTaskId = proj.tasks.length > 0 ? Math.max(...proj.tasks.map(t => t.id || 0)) + 1 : 1;
 
@@ -5435,8 +6320,12 @@
       const newTask = {
         id: newTaskId,
         title: title,
+        description: description,
         startDate: startDate,
         endDate: dueDate,
+        baselineEndDate: dueDate,
+        actualEndDate: progress === 100 ? getBangkokTodayStr() : '',
+        extensionHistory: [],
         progress: progress,
         status: status,
         assignee: assignee,
@@ -5456,6 +6345,7 @@
       };
 
       proj.tasks.push(newTask);
+      sortProjectTasksByDate(proj.tasks);
 
       // Recalculate Project Overall Progress
       const avg = Math.round(proj.tasks.reduce((sum, t) => sum + (t.progress || 0), 0) / proj.tasks.length);
@@ -5600,6 +6490,55 @@
 
       document.getElementById('modal-task-proj-name').textContent = `โครงการ: ${proj.name}`;
       document.getElementById('modal-task-title').value = task.title;
+      const modalDescEl = document.getElementById('modal-task-description');
+      if (modalDescEl) modalDescEl.value = task.description || '';
+
+      // Schedule & Extension fields
+      const startEl = document.getElementById('modal-task-start');
+      const baseEndEl = document.getElementById('modal-task-baseline-end');
+      const curEndEl = document.getElementById('modal-task-end');
+      const actualEndEl = document.getElementById('modal-task-actual-end');
+      const extPanel = document.getElementById('modal-extension-panel');
+      const extReasonEl = document.getElementById('modal-task-ext-reason');
+      const extNotesEl = document.getElementById('modal-task-ext-notes');
+      const extHistEl = document.getElementById('modal-task-extension-history');
+
+      const taskStart = task.startDate || proj.startDate || '';
+      const taskEnd = task.endDate || task.dueDate || proj.endDate || '';
+      const taskBaselineEnd = task.baselineEndDate || taskEnd;
+
+      if (startEl) startEl.value = taskStart;
+      if (baseEndEl) baseEndEl.value = taskBaselineEnd;
+      if (curEndEl) {
+        curEndEl.value = taskEnd;
+        curEndEl.dataset.originalEnd = taskEnd;
+      }
+      if (actualEndEl) actualEndEl.value = task.actualEndDate || '';
+      if (extPanel) extPanel.style.display = 'none';
+      if (extReasonEl) extReasonEl.value = '';
+      if (extNotesEl) extNotesEl.value = '';
+
+      if (extHistEl) {
+        const extLogs = task.extensionHistory || [];
+        if (extLogs.length === 0) {
+          extHistEl.innerHTML = '';
+          extHistEl.style.display = 'none';
+        } else {
+          extHistEl.style.display = 'block';
+          extHistEl.innerHTML = `
+            <div style="font-size:11px; font-weight:700; color:#475569; margin-bottom:4px;">
+              <i class="fa-solid fa-clock-rotate-left"></i> ประวัติการขยายแผนงาน (${extLogs.length} ครั้ง)
+            </div>
+            ${extLogs.map(item => `
+              <div style="font-size:11px; color:#334155; padding:4px 8px; background:#f8fafc; border-left:3px solid #f59e0b; border-radius:4px; margin-bottom:4px;">
+                <strong>${item.oldEndDate} &rarr; ${item.newEndDate}</strong> (${item.extendedDays >= 0 ? '+' : ''}${item.extendedDays} วัน)
+                <div style="color:#64748b;">เหตุผล: ${item.reason || '-'}${item.notes ? ' | ' + item.notes : ''}</div>
+                <div style="color:#94a3b8; font-size:10px;">โดย ${item.editedBy || 'ผู้ดูแลระบบ'} เมื่อ ${item.editedAt || '-'}</div>
+              </div>
+            `).join('')}
+          `;
+        }
+      }
 
       setModalSliderValue(task.progress);
 
@@ -5675,6 +6614,65 @@
       const proj = appState.projects.find(p => p.id === projId);
       if (proj && proj.tasks) {
         updateModalCalcPreview(val, proj.tasks, projId, taskId);
+      }
+
+      const actualEndEl = document.getElementById('modal-task-actual-end');
+      if (actualEndEl && val === 100 && !actualEndEl.value) {
+        actualEndEl.value = getBangkokTodayStr();
+      }
+      refreshModalScheduleBadge();
+    }
+
+    function onModalCurrentEndChange() {
+      const curEndEl = document.getElementById('modal-task-end');
+      const extPanel = document.getElementById('modal-extension-panel');
+      const extPreview = document.getElementById('modal-ext-days-preview');
+      if (!curEndEl || !extPanel) return;
+
+      const origEnd = curEndEl.dataset.originalEnd || '';
+      const newEnd = curEndEl.value || '';
+      if (origEnd && newEnd && newEnd !== origEnd) {
+        const diff = calendarDiffDays(origEnd, newEnd);
+        extPanel.style.display = 'block';
+        if (extPreview) {
+          extPreview.textContent = diff > 0
+            ? `ขยายเวลา +${diff} วัน (${origEnd} → ${newEnd})`
+            : `ปรับลดระยะเวลา ${diff} วัน (${origEnd} → ${newEnd})`;
+        }
+      } else {
+        extPanel.style.display = 'none';
+      }
+      refreshModalScheduleBadge();
+    }
+
+    function refreshModalScheduleBadge() {
+      const badgeEl = document.getElementById('modal-task-schedule-badge');
+      if (!badgeEl) return;
+
+      const prog = parseInt(document.getElementById('modal-progress-slider')?.value || 0);
+      const startDate = document.getElementById('modal-task-start')?.value || '';
+      const endDate = document.getElementById('modal-task-end')?.value || '';
+      const baselineEndDate = document.getElementById('modal-task-baseline-end')?.value || endDate;
+      const actualEndDate = document.getElementById('modal-task-actual-end')?.value || '';
+
+      const ev = evaluateTaskSchedule({
+        progress: prog,
+        startDate,
+        endDate,
+        baselineEndDate,
+        actualEndDate
+      });
+
+      if (ev.statusKey === 'delayed') {
+        badgeEl.innerHTML = `<span style="color:#dc2626; background:#fef2f2; border:1px solid #fecaca; padding:3px 8px; border-radius:999px; font-size:11px; font-weight:700;"><i class="fa-solid fa-triangle-exclamation"></i> ล่าช้า ${ev.delayDays} วัน</span>`;
+      } else if (ev.statusKey === 'completed-late') {
+        badgeEl.innerHTML = `<span style="color:#b45309; background:#fffbeb; border:1px solid #fde68a; padding:3px 8px; border-radius:999px; font-size:11px; font-weight:700;"><i class="fa-solid fa-circle-check"></i> เสร็จล่าช้า (${ev.completedDelayDays} วัน)</span>`;
+      } else if (ev.statusKey === 'completed-on-time') {
+        badgeEl.innerHTML = `<span style="color:#15803d; background:#dcfce7; border:1px solid #bbf7d0; padding:3px 8px; border-radius:999px; font-size:11px; font-weight:700;"><i class="fa-solid fa-circle-check"></i> เสร็จตามแผน</span>`;
+      } else if (ev.statusKey === 'inprogress') {
+        badgeEl.innerHTML = `<span style="color:#0369a1; background:#e0f2fe; border:1px solid #bae6fd; padding:3px 8px; border-radius:999px; font-size:11px; font-weight:700;"><i class="fa-solid fa-rotate"></i> กำลังดำเนินการ</span>`;
+      } else {
+        badgeEl.innerHTML = `<span style="color:#475569; background:#f1f5f9; border:1px solid #cbd5e1; padding:3px 8px; border-radius:999px; font-size:11px; font-weight:700;"><i class="fa-regular fa-clock"></i> รอดำเนินการ</span>`;
       }
     }
 
@@ -5754,8 +6752,59 @@
       const task = proj.tasks.find(t => t.id === taskId);
       if (!task) return;
 
+      const newStartDate = document.getElementById('modal-task-start') ? document.getElementById('modal-task-start').value : (task.startDate || '');
+      const newEndDate = document.getElementById('modal-task-end') ? document.getElementById('modal-task-end').value : (task.endDate || '');
+      const newActualEndDate = document.getElementById('modal-task-actual-end') ? document.getElementById('modal-task-actual-end').value : '';
+      const extReason = document.getElementById('modal-task-ext-reason') ? document.getElementById('modal-task-ext-reason').value.trim() : '';
+      const extNotes = document.getElementById('modal-task-ext-notes') ? document.getElementById('modal-task-ext-notes').value.trim() : '';
+
+      // Require actualEndDate when progress === 100
+      if (newProg === 100 && !newActualEndDate) {
+        showToast('กรุณาระบุวันที่แล้วเสร็จจริง (Actual End Date) เมื่องานครบ 100%', 'warning');
+        const actualEl = document.getElementById('modal-task-actual-end');
+        if (actualEl) actualEl.focus();
+        return;
+      }
+
+      // Preserve baselineEndDate
+      if (!task.baselineEndDate) {
+        task.baselineEndDate = task.endDate || task.dueDate || proj.endDate || newEndDate;
+      }
+
+      const oldEndDate = task.endDate || task.dueDate || proj.endDate || '';
+      if (newEndDate && oldEndDate && newEndDate !== oldEndDate) {
+        if (!extReason) {
+          showToast('กรุณาระบุเหตุผลการขยายวันสิ้นสุดตามแผน', 'warning');
+          const reasonEl = document.getElementById('modal-task-ext-reason');
+          if (reasonEl) reasonEl.focus();
+          return;
+        }
+        const extendedDays = calendarDiffDays(oldEndDate, newEndDate);
+        const editedAt = new Date().toLocaleDateString('th-TH') + ' ' + new Date().toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+        const editedBy = appState.currentUser ? appState.currentUser.name : 'ผู้ดูแลระบบ';
+        if (!task.extensionHistory) task.extensionHistory = [];
+        task.extensionHistory.unshift({
+          oldEndDate,
+          newEndDate,
+          extendedDays,
+          reason: extReason,
+          notes: extNotes,
+          editedBy,
+          editedAt
+        });
+        addAuditLog('ขยายแผนงาน', `ปรับวันสิ้นสุด "${task.title}" จาก ${oldEndDate} เป็น ${newEndDate} (${extendedDays >= 0 ? '+' : ''}${extendedDays} วัน) เหตุผล: ${extReason}`);
+      }
+
+      if (newStartDate) task.startDate = newStartDate;
+      if (newEndDate) task.endDate = newEndDate;
+      task.actualEndDate = newProg === 100 ? newActualEndDate : '';
+
+      const newDesc = document.getElementById('modal-task-description') ? document.getElementById('modal-task-description').value.trim() : (task.description || '');
+      task.description = newDesc;
+
       task.progress = newProg;
       if (newTitle) task.title = newTitle;
+      sortProjectTasksByDate(proj.tasks);
       task.assignee = newAssignee;
       task.problems = newProblems;
       task.solutions = newSolutions;
@@ -5973,19 +7022,32 @@
       files.forEach((file, idx) => {
         const reader = new FileReader();
         reader.onload = function(e) {
-          sitePhotosList.push({
-            id: Date.now() + Math.floor(Math.random() * 1000) + idx,
-            url: e.target.result,
-            caption: file.name.replace(/\.[^/.]+$/, ""),
-            tag: 'progress',
-            date: today
-          });
-          readCount++;
-          if (readCount === files.length) {
-            renderSitePhotosGrid();
-            input.value = '';
-            showToast(`เพิ่มรูปภาพหน้างานแล้ว ${files.length} รูป`, 'success');
-          }
+          const img = new Image();
+          img.onload = function() {
+            const maxW = 1024;
+            const scale = img.width > maxW ? (maxW / img.width) : 1;
+            const canvas = document.createElement('canvas');
+            canvas.width = Math.round(img.width * scale);
+            canvas.height = Math.round(img.height * scale);
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            const compressedUrl = canvas.toDataURL('image/jpeg', 0.8);
+
+            sitePhotosList.push({
+              id: Date.now() + Math.floor(Math.random() * 1000) + idx,
+              url: compressedUrl,
+              caption: file.name.replace(/\.[^/.]+$/, ""),
+              tag: 'progress',
+              date: today
+            });
+            readCount++;
+            if (readCount === files.length) {
+              renderSitePhotosGrid();
+              input.value = '';
+              showToast(`เพิ่มและบีบอัดรูปภาพหน้างานแล้ว ${files.length} รูป`, 'success');
+            }
+          };
+          img.src = e.target.result;
         };
         reader.readAsDataURL(file);
       });
@@ -6188,20 +7250,27 @@
       const inspector = document.getElementById('site-inspector').value.trim();
       const hasIssue = document.getElementById('site-has-issue-toggle').checked;
 
+      if (!task.baselineEndDate) {
+        task.baselineEndDate = task.endDate || task.dueDate || proj.endDate || '';
+      }
       task.progress = newProg;
       task.notes = workDone;
       if (newProg === 100) {
         task.status = 'done';
         task.barClass = 'bar-complete';
+        task.actualEndDate = task.actualEndDate || siteDate || getBangkokTodayStr();
       } else if (newProg >= 60) {
         task.status = 'doing';
         task.barClass = 'bar-prog-70';
+        task.actualEndDate = '';
       } else if (newProg > 0) {
         task.status = 'doing';
         task.barClass = 'bar-prog-30';
+        task.actualEndDate = '';
       } else {
         task.status = 'todo';
         task.barClass = 'bar-prog-0';
+        task.actualEndDate = '';
       }
 
       // Save photos
@@ -6840,15 +7909,30 @@
             </td>
         `;
 
+        const projDelayed = evaluateProjectStatus(proj) === 'delayed' && (proj.progress || 0) < 100;
+        let overdueEndIdx = endIdx;
+        if (projDelayed && todayCol > endIdx) {
+          overdueEndIdx = todayCol;
+        }
+        const overdueSpan = Math.max(0, overdueEndIdx - endIdx);
+
         for (let m = 0; m < totalMonths; m++) {
           html += `<td class="gantt-grid-cell">`;
           if (m === startIdx) {
-            const barClass = proj.progress === 100 ? 'bar-complete' : (proj.status === 'delayed' ? 'bar-prog-30' : 'bar-prog-70');
+            const pVal = Math.max(0, Math.min(100, proj.progress || 0));
+            const fillClass = projDelayed ? 'prog-delayed' : (pVal === 100 ? 'prog-done' : (pVal >= 70 ? 'prog-good' : (pVal > 0 ? 'prog-warn' : 'prog-0')));
+            const lblClass = pVal === 0 ? 'label-dark' : 'label-light';
             html += `
-              <div class="gantt-bar-item ${barClass}" style="left: 4px; width: calc(${spanM * 100}% - 8px);">
-                ${proj.progress || 0}%
+              <div class="gantt-plan-track" style="left: 4px; width: calc(${spanM * 100}% - 8px);" title="${proj.name} (${pVal}%)">
+                <div class="gantt-progress-fill ${fillClass}" style="width: ${pVal}%;"></div>
+                <span class="gantt-progress-label ${lblClass}">${pVal}%</span>
               </div>
             `;
+            if (overdueSpan > 0) {
+              html += `
+                <div class="gantt-bar-overdue" style="left: calc(${spanM * 100}% - 4px); width: calc(${overdueSpan * 100}% - 4px);" title="โครงการล่าช้าเกินกำหนด"></div>
+              `;
+            }
           }
           if (m === todayCol) {
             html += `<div class="today-marker-line" style="left: 50%;"></div>`;
@@ -8065,126 +9149,301 @@
         return `ปีงบประมาณ ${new Date().getFullYear() + 543}`;
       })();
 
-      // Collect tasks, issues, and photos from selected projects
+      // Collect tasks, schedule evaluations, issues, and photos from selected projects
       const allTasks = [];
       const allIssues = [];
       const allPhotos = [];
+      const delayedTasksList = [];
+      let doneTasks = 0;
+
       selectedProjs.forEach(p => {
-        (p.tasks || []).forEach(t => {
-          allTasks.push({ ...t, projName: p.name });
+        const sortedTasks = sortProjectTasksByDate([...(p.tasks || [])]);
+        sortedTasks.forEach(t => {
+          const sched = evaluateTaskSchedule(t, p);
+          if (sched.progress === 100) doneTasks++;
+          if (sched.isDelayed) {
+            delayedTasksList.push({ projName: p.name, taskTitle: t.title, delayDays: sched.delayDays, endDate: sched.currentEnd, progress: sched.progress });
+          }
+          allTasks.push({ ...t, projName: p.name, sched });
           if (t.problems || (t.consultation && t.consultation.needed)) {
             allIssues.push({
               projName: p.name,
               taskTitle: t.title,
               topic: (t.consultation && t.consultation.topic) || t.problems,
-              solution: t.solutions || '-'
+              impact: t.problemImpact || '',
+              solution: t.solutions || '-',
+              resolved: t.consultation && t.consultation.status === 'resolved'
             });
           }
           if (t.photos && t.photos.length > 0) {
-            t.photos.forEach(ph => allPhotos.push({ ...ph, taskTitle: t.title }));
+            t.photos.forEach(ph => allPhotos.push({ ...ph, taskTitle: t.title, projName: p.name }));
           }
         });
       });
 
-      const doneTasks = allTasks.filter(t => t.progress === 100).length;
-      const delayedProjs = selectedProjs.filter(p => p.status === 'delayed' || p.status === 'duesoon').length;
-
+      const delayedProjs = selectedProjs.filter(p => evaluateProjectStatus(p) === 'delayed').length;
       const enabledTopics = Array.from(document.querySelectorAll('.pres-slide-chk:checked')).map(c => c.value);
       const activeTopics = enabledTopics.length > 0 ? enabledTopics : ['overview'];
+
+      const presDateStr = new Date().toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric' });
 
       const slideMap = {
         overview: {
           badge: `การประชุมคณะกรรมการประจำคณะอุตสาหกรรมเกษตร | ${yearLabel}`,
           title: totalProjs === 1
-            ? `${selectedProjs[0].name} (คืบหน้า ${selectedProjs[0].progress || 0}%)`
+            ? `${selectedProjs[0].name}`
             : `รายงานภาพรวมการติดตามโครงการ (${totalProjs} โครงการ)`,
           desc: totalProjs > 0
-            ? `ความคืบหน้าเฉลี่ย ${avgProg}% | เบิกจ่ายงบประมาณแล้ว ${totalSpent.toFixed(2)} ล้านบาท จากงบอนุมัติ ${totalBudget.toFixed(2)} ล้านบาท (${spentPct}%)`
+            ? `สรุปสถานะการดำเนินงาน ณ วันที่ ${presDateStr} | ความคืบหน้าเฉลี่ย ${avgProg}% | เบิกจ่ายแล้ว ${totalSpent.toFixed(2)} จาก ${totalBudget.toFixed(2)} ล้านบาท (${spentPct}%)`
             : `ไม่พบโครงการตามเงื่อนไขที่เลือก กรุณาเลือกโครงการหรือเพิ่มข้อมูลใหม่`,
           extraHtml: totalProjs > 0 ? `
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 18px; width: 100%; max-width: 760px;">
-              <div style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 12px; text-align: center;">
-                <div style="font-size: 11px; color: #cbd5e1;">โครงการที่นำเสนอ</div>
-                <div style="font-size: 24px; font-weight: 800; color: #86efac;">${totalProjs}</div>
+            <div class="pres-kpi-grid">
+              <div class="pres-kpi-card" style="border-left: 4px solid #166534;">
+                <div class="pres-kpi-label">โครงการที่นำเสนอ</div>
+                <div class="pres-kpi-val" style="color: #166534;">${totalProjs} <span style="font-size:12px;font-weight:500;color:#64748b;">โครงการ</span></div>
               </div>
-              <div style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 12px; text-align: center;">
-                <div style="font-size: 11px; color: #cbd5e1;">ความคืบหน้าเฉลี่ย</div>
-                <div style="font-size: 24px; font-weight: 800; color: #4ade80;">${avgProg}%</div>
+              <div class="pres-kpi-card" style="border-left: 4px solid #15803d;">
+                <div class="pres-kpi-label">ความคืบหน้าเฉลี่ย</div>
+                <div class="pres-kpi-val" style="color: #15803d;">${avgProg}%</div>
               </div>
-              <div style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 12px; text-align: center;">
-                <div style="font-size: 11px; color: #cbd5e1;">งานย่อยเสร็จสิ้น</div>
-                <div style="font-size: 24px; font-weight: 800; color: #38bdf8;">${doneTasks} / ${allTasks.length}</div>
+              <div class="pres-kpi-card" style="border-left: 4px solid #0369a1;">
+                <div class="pres-kpi-label">งานย่อยเสร็จสิ้น</div>
+                <div class="pres-kpi-val" style="color: #0369a1;">${doneTasks} <span style="font-size:13px;font-weight:600;color:#64748b;">/ ${allTasks.length}</span></div>
               </div>
-              <div style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 12px; text-align: center;">
-                <div style="font-size: 11px; color: #cbd5e1;">โครงการเสี่ยง/ล่าช้า</div>
-                <div style="font-size: 24px; font-weight: 800; color: ${delayedProjs > 0 ? '#f87171' : '#86efac'};">${delayedProjs}</div>
+              <div class="pres-kpi-card" style="border-left: 4px solid ${delayedProjs > 0 || delayedTasksList.length > 0 ? '#dc2626' : '#16a34a'};">
+                <div class="pres-kpi-label">โครงการ / งานล่าช้า</div>
+                <div class="pres-kpi-val" style="color: ${delayedProjs > 0 || delayedTasksList.length > 0 ? '#dc2626' : '#16a34a'};">${delayedProjs} <span style="font-size:12px;font-weight:500;color:#64748b;">โครงการ (${delayedTasksList.length} งาน)</span></div>
               </div>
+            </div>
+            <div class="pres-table-wrap">
+              <table class="pres-table">
+                <thead>
+                  <tr>
+                    <th style="width:36px;text-align:center;">#</th>
+                    <th>ชื่อโครงการ / หน่วยงาน</th>
+                    <th>ผู้รับผิดชอบ</th>
+                    <th>ระยะเวลาแผนงาน</th>
+                    <th style="width:150px;">ความคืบหน้า</th>
+                    <th style="width:110px;text-align:center;">สถานะ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${selectedProjs.map((p, idx) => {
+                    const pSt = evaluateProjectStatus(p);
+                    const pPct = p.progress || 0;
+                    const pCol = pSt === 'delayed' ? '#dc2626' : (pPct === 100 ? '#16a34a' : (pPct >= 70 ? '#22c55e' : '#d97706'));
+                    return `
+                      <tr>
+                        <td style="text-align:center;color:#64748b;font-weight:600;">${idx + 1}</td>
+                        <td>
+                          <div style="font-weight:700;color:#0f172a;">${p.name}</div>
+                          <div style="font-size:11px;color:#64748b;">${p.department || '-'} | รหัส ${p.code || '-'}</div>
+                        </td>
+                        <td style="font-size:12px;">${p.manager || '-'}</td>
+                        <td style="font-size:12px;white-space:nowrap;">${p.startDate || '-'} ถึง ${p.endDate || '-'}</td>
+                        <td>
+                          <div style="display:flex;align-items:center;gap:8px;">
+                            <div style="flex:1;height:8px;background:#e2e8f0;border-radius:999px;overflow:hidden;">
+                              <div style="width:${pPct}%;height:100%;background:${pCol};"></div>
+                            </div>
+                            <span style="font-weight:700;color:${pCol};min-width:34px;text-align:right;">${pPct}%</span>
+                          </div>
+                        </td>
+                        <td style="text-align:center;">${getStatusBadge(pSt)}</td>
+                      </tr>
+                    `;
+                  }).join('')}
+                </tbody>
+              </table>
             </div>
           ` : ''
         },
         tasks: {
-          badge: `ความก้าวหน้ารายหัวข้องาน (${allTasks.length} กิจกรรม)`,
-          title: totalProjs === 1 ? `รายละเอียดงาน: ${selectedProjs[0].name}` : `สรุปกิจกรรมย่อยของโครงการที่เลือก`,
+          badge: `รายละเอียดงานย่อยและแผนปฏิบัติงาน (${allTasks.length} กิจกรรม)`,
+          title: totalProjs === 1 ? `ความก้าวหน้ารายหัวข้องาน : ${selectedProjs[0].name}` : `สรุปหัวข้องานย่อยทั้งหมด (${allTasks.length} งาน)`,
           desc: allTasks.length > 0
-            ? `ดำเนินการแล้วเสร็จ ${doneTasks} จากทั้งหมด ${allTasks.length} หัวข้องาน`
+            ? `เรียงตามปฏิทินแผนงาน | เสร็จสิ้น ${doneTasks} งาน | กำลังดำเนินการ ${allTasks.filter(t => !t.sched.isDelayed && t.sched.progress > 0 && t.sched.progress < 100).length} งาน | ล่าช้า ${delayedTasksList.length} งาน`
             : `ยังไม่มีหัวข้องานย่อยในโครงการที่เลือก`,
           extraHtml: allTasks.length > 0 ? `
-            <div style="margin-top: 14px; width: 100%; max-width: 760px; max-height: 220px; overflow-y: auto; text-align: left; display: flex; flex-direction: column; gap: 6px;">
-              ${allTasks.slice(0, 8).map((t, idx) => `
-                <div style="background: rgba(255,255,255,0.06); padding: 8px 12px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; gap: 10px;">
-                  <span style="font-size: 13px; color: #f8fafc; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${idx + 1}. ${t.title}</span>
-                  <span style="font-size: 12px; font-weight: 700; color: ${t.progress === 100 ? '#4ade80' : '#fbbf24'}; white-space: nowrap;">${t.progress}%</span>
-                </div>
-              `).join('')}
+            <div class="pres-table-wrap">
+              <table class="pres-table">
+                <thead>
+                  <tr>
+                    <th style="width:36px;text-align:center;">#</th>
+                    <th>หัวข้องาน / รายละเอียด</th>
+                    <th style="width:130px;">ผู้รับผิดชอบ</th>
+                    <th style="width:165px;">กำหนดแผนงาน</th>
+                    <th style="width:130px;">ความคืบหน้า</th>
+                    <th style="width:130px;text-align:center;">สถานะ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${allTasks.map((t, idx) => {
+                    const sc = t.sched;
+                    const barCol = sc.isDelayed ? '#dc2626' : (sc.progress === 100 ? '#16a34a' : (sc.progress >= 70 ? '#22c55e' : (sc.progress > 0 ? '#f59e0b' : '#94a3b8')));
+                    let stHtml = `<span class="badge-status" style="background:#f1f5f9;color:#475569;border:1px solid #cbd5e1;">รอดำเนินการ</span>`;
+                    if (sc.statusKey === 'delayed') stHtml = `<span class="badge-status badge-delayed">ล่าช้า ${sc.delayDays} วัน</span>`;
+                    else if (sc.statusKey === 'completed-late') stHtml = `<span class="badge-status" style="background:#fffbeb;color:#b45309;border:1px solid #fde68a;">เสร็จล่าช้า (${sc.completedDelayDays} วัน)</span>`;
+                    else if (sc.statusKey === 'completed-on-time') stHtml = `<span class="badge-status badge-completed">เสร็จตามแผน</span>`;
+                    else if (sc.statusKey === 'inprogress') stHtml = `<span class="badge-status badge-inprogress">กำลังดำเนินการ</span>`;
+
+                    return `
+                      <tr>
+                        <td style="text-align:center;color:#64748b;font-weight:600;">${idx + 1}</td>
+                        <td>
+                          <div style="font-weight:600;color:#0f172a;">${t.title}</div>
+                          ${t.description ? `<div style="font-size:11px;color:#475569;margin-top:2px;">${t.description}</div>` : ''}
+                          ${totalProjs > 1 ? `<div style="font-size:10.5px;color:#15803d;">โครงการ: ${t.projName}</div>` : ''}
+                        </td>
+                        <td style="font-size:12px;">${t.assignee || '-'}</td>
+                        <td style="font-size:11.5px;white-space:nowrap;">
+                          ${t.startDate || '-'} ถึง ${sc.currentEnd || '-'}
+                          ${sc.isExtended ? `<div style="font-size:10px;color:#b45309;">ขยายเวลา (เดิม ${sc.baselineEnd})</div>` : ''}
+                        </td>
+                        <td>
+                          <div style="display:flex;align-items:center;gap:6px;">
+                            <div style="flex:1;height:8px;background:#e2e8f0;border-radius:999px;overflow:hidden;">
+                              <div style="width:${sc.progress}%;height:100%;background:${barCol};"></div>
+                            </div>
+                            <span style="font-weight:700;color:${barCol};min-width:32px;text-align:right;">${sc.progress}%</span>
+                          </div>
+                        </td>
+                        <td style="text-align:center;">${stHtml}</td>
+                      </tr>
+                    `;
+                  }).join('')}
+                </tbody>
+              </table>
             </div>
           ` : ''
         },
         budget: {
           badge: `การบริหารงบประมาณและการเบิกจ่าย | ${yearLabel}`,
           title: `สรุปงบประมาณรวม ${totalBudget.toFixed(2)} ล้านบาท`,
-          desc: `เบิกจ่ายจริงแล้ว ${totalSpent.toFixed(2)} ล้านบาท (${spentPct}%) | คงเหลือ ${(totalBudget - totalSpent).toFixed(2)} ล้านบาท`,
+          desc: `เบิกจ่ายจริงแล้ว ${totalSpent.toFixed(2)} ล้านบาท (${spentPct}%) | คงเหลือสุทธิ ${(totalBudget - totalSpent).toFixed(2)} ล้านบาท`,
           extraHtml: `
-            <div style="margin-top: 16px; width: 100%; max-width: 680px; background: rgba(255,255,255,0.08); padding: 14px; border-radius: 8px;">
-              <div style="display: flex; justify-content: space-between; font-size: 13px; color: #e2e8f0; margin-bottom: 6px;">
-                <span>อัตราการเบิกจ่ายงบประมาณ</span>
-                <span style="font-weight: 700; color: #4ade80;">${spentPct}%</span>
+            <div class="pres-kpi-grid">
+              <div class="pres-kpi-card" style="border-left: 4px solid #334155;">
+                <div class="pres-kpi-label">งบประมาณอนุมัติรวม</div>
+                <div class="pres-kpi-val" style="color: #1e293b;">${totalBudget.toFixed(2)} <span style="font-size:12px;font-weight:500;color:#64748b;">ล้านบาท</span></div>
               </div>
-              <div style="width: 100%; height: 12px; background: rgba(255,255,255,0.15); border-radius: 6px; overflow: hidden;">
-                <div style="width: ${Math.min(100, parseFloat(spentPct))}%; height: 100%; background: #22c55e;"></div>
+              <div class="pres-kpi-card" style="border-left: 4px solid #0284c7;">
+                <div class="pres-kpi-label">เบิกจ่ายจริงแล้ว</div>
+                <div class="pres-kpi-val" style="color: #0284c7;">${totalSpent.toFixed(2)} <span style="font-size:12px;font-weight:500;color:#64748b;">ล้านบาท (${spentPct}%)</span></div>
               </div>
+              <div class="pres-kpi-card" style="border-left: 4px solid #16a34a;">
+                <div class="pres-kpi-label">งบประมาณคงเหลือ</div>
+                <div class="pres-kpi-val" style="color: #16a34a;">${(totalBudget - totalSpent).toFixed(2)} <span style="font-size:12px;font-weight:500;color:#64748b;">ล้านบาท</span></div>
+              </div>
+            </div>
+            <div class="pres-table-wrap">
+              <table class="pres-table">
+                <thead>
+                  <tr>
+                    <th>ชื่อโครงการ</th>
+                    <th style="text-align:right;">งบอนุมัติ (บาท)</th>
+                    <th style="text-align:right;">เบิกจ่ายจริง (บาท)</th>
+                    <th style="text-align:right;">คงเหลือ (บาท)</th>
+                    <th style="width:140px;">อัตราเบิกจ่าย</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${selectedProjs.map(p => {
+                    const b = parseFloat(p.budget) || 0;
+                    const sp = calculateProjectSpent(p.id);
+                    const rem = b - sp;
+                    const pct = b > 0 ? ((sp / b) * 100).toFixed(1) : '0.0';
+                    return `
+                      <tr>
+                        <td style="font-weight:600;">${p.name}</td>
+                        <td style="text-align:right;font-variant-numeric:tabular-nums;">${b.toLocaleString('th-TH')}</td>
+                        <td style="text-align:right;color:#0284c7;font-weight:600;font-variant-numeric:tabular-nums;">${sp.toLocaleString('th-TH')}</td>
+                        <td style="text-align:right;color:#16a34a;font-weight:600;font-variant-numeric:tabular-nums;">${rem.toLocaleString('th-TH')}</td>
+                        <td>
+                          <div style="display:flex;align-items:center;gap:6px;">
+                            <div style="flex:1;height:8px;background:#e2e8f0;border-radius:999px;overflow:hidden;">
+                              <div style="width:${Math.min(100, parseFloat(pct))}%;height:100%;background:#16a34a;"></div>
+                            </div>
+                            <span style="font-size:11.5px;font-weight:700;color:#334155;">${pct}%</span>
+                          </div>
+                        </td>
+                      </tr>
+                    `;
+                  }).join('')}
+                </tbody>
+              </table>
             </div>
           `
         },
         issues: {
-          badge: `ประเด็นปัญหา & ภาพถ่ายหน้างาน (${allIssues.length} ประเด็น | ${allPhotos.length} ภาพ)`,
-          title: allIssues.length > 0 ? `ประเด็นปัญหาและข้อจำกัดที่ต้องพิจารณา` : `การดำเนินงานเป็นไปตามแผน ไม่พบปัญหาติดขัด`,
-          desc: allIssues.length > 0
-            ? `พบประเด็นที่รายงานจากหน้างานจำนวน ${allIssues.length} หัวข้อ พร้อมหลักฐานภาพถ่ายประกอบ`
-            : `ทุกหัวข้องานที่เลือกยังไม่มีรายงานปัญหาอุปสรรคหรือประเด็นขอรับคำปรึกษา`,
-          extraHtml: (allIssues.length > 0 || allPhotos.length > 0) ? `
-            <div style="margin-top: 12px; width: 100%; max-width: 760px; text-align: left; display: flex; flex-direction: column; gap: 8px;">
-              ${allIssues.slice(0, 3).map((iss, i) => `
-                <div style="background: rgba(234, 88, 12, 0.18); border: 1px solid rgba(251, 146, 60, 0.4); padding: 8px 12px; border-radius: 6px; font-size: 12.5px; color: #ffedd5;">
-                  <strong>${i + 1}. ${iss.taskTitle}:</strong> ${iss.topic}
+          badge: `ประเด็นปัญหา งานล่าช้า & ภาพถ่ายหน้างาน (${allIssues.length} ประเด็น | ${delayedTasksList.length} งานล่าช้า | ${allPhotos.length} ภาพ)`,
+          title: (allIssues.length > 0 || delayedTasksList.length > 0) ? `ประเด็นปัญหาและงานที่ต้องติดตามเร่งด่วน` : `การดำเนินงานเป็นไปตามแผน ไม่พบปัญหาติดขัด`,
+          desc: (allIssues.length > 0 || delayedTasksList.length > 0)
+            ? `สรุปรายงานปัญหาหน้างาน ${allIssues.length} หัวข้อ และงานเกินกำหนด ${delayedTasksList.length} รายการ พร้อมภาพถ่ายหลักฐาน`
+            : `ทุกหัวข้องานที่เลือกดำเนินการได้ตามแผนงาน ยังไม่มีรายงานปัญหาอุปสรรค`,
+          extraHtml: `
+            <div style="display: flex; flex-direction: column; gap: 10px; max-height: 330px; overflow-y: auto;">
+              ${delayedTasksList.map((dl, i) => `
+                <div style="background: #fef2f2; border: 1px solid #fecaca; border-left: 4px solid #dc2626; padding: 10px 14px; border-radius: 8px; font-size: 12.5px; color: #7f1d1d;">
+                  <strong><i class="fa-solid fa-triangle-exclamation"></i> งานล่าช้า ${i + 1}: ${dl.taskTitle}</strong> (${dl.projName})
+                  <div style="font-size:12px;margin-top:2px;">เกินกำหนด ${dl.delayDays} วัน (กำหนดเสร็จ ${dl.endDate}) | ความคืบหน้าปัจจุบัน ${dl.progress}%</div>
+                </div>
+              `).join('')}
+              ${allIssues.map((iss, i) => `
+                <div style="background: #fffbeb; border: 1px solid #fde68a; border-left: 4px solid #d97706; padding: 10px 14px; border-radius: 8px; font-size: 12.5px; color: #78350f;">
+                  <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
+                    <strong>${i + 1}. ${iss.taskTitle} (${iss.projName})</strong>
+                    <span style="font-size:11px;padding:2px 8px;border-radius:999px;background:${iss.resolved ? '#dcfce7' : '#fef3c7'};color:${iss.resolved ? '#166534' : '#92400e'};font-weight:600;">${iss.resolved ? 'ได้รับมติแล้ว' : 'รอพิจารณา'}</span>
+                  </div>
+                  <div style="margin-top:4px;"><strong>ประเด็นปัญหา:</strong> ${iss.topic}</div>
+                  ${iss.impact ? `<div style="margin-top:2px;color:#b91c1c;"><strong>ผลกระทบ:</strong> ${iss.impact}</div>` : ''}
+                  <div style="margin-top:2px;color:#166534;"><strong>แนวทางแก้ไข:</strong> ${iss.solution}</div>
                 </div>
               `).join('')}
               ${allPhotos.length > 0 ? `
-                <div style="display: flex; gap: 8px; margin-top: 4px; overflow-x: auto;">
-                  ${allPhotos.slice(0, 4).map(ph => `<img src="${ph.url}" style="width: 110px; height: 72px; object-fit: cover; border-radius: 6px; border: 1px solid rgba(255,255,255,0.3);" alt="ภาพหน้างาน">`).join('')}
+                <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:8px;padding:10px 12px;">
+                  <div style="font-size:12px;font-weight:700;color:#334155;margin-bottom:8px;"><i class="fa-solid fa-camera"></i> ภาพถ่ายหลักฐานหน้างาน (${allPhotos.length} ภาพ)</div>
+                  <div style="display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px;">
+                    ${allPhotos.slice(0, 6).map(ph => `
+                      <div style="flex-shrink:0;width:130px;">
+                        <img src="${ph.url}" onclick="viewLargeImage('${ph.url}')" style="width: 130px; height: 84px; object-fit: cover; border-radius: 6px; border: 1px solid #cbd5e1; cursor:pointer;" alt="ภาพหน้างาน">
+                        <div style="font-size:10.5px;color:#475569;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${ph.taskTitle}">${ph.caption || ph.taskTitle}</div>
+                      </div>
+                    `).join('')}
+                  </div>
                 </div>
               ` : ''}
             </div>
-          ` : ''
+          `
         },
         action: {
-          badge: "ข้อเสนอแนะและมาตรการเร่งรัด",
-          title: "แผนการดำเนินงานและการติดตามความก้าวหน้ารายสัปดาห์",
-          desc: "ติดตามงานย่อยอย่างใกล้ชิดผ่านระบบ Project Tracking System กำกับดูแลกิจกรรมที่ใกล้ครบกำหนด (&le;7 วัน) และเร่งรัดการแก้ไขปัญหาที่ค้างพิจารณาตามมติคณะกรรมการ",
-          extraHtml: ''
+          badge: `ข้อเสนอแนะและมาตรการเร่งรัด | ${yearLabel}`,
+          title: `สรุปแนวทางการติดตามและข้อเสนอต่อที่ประชุม`,
+          desc: `ข้อมูลประมวลผลอัตโนมัติจากระบบติดตามโครงการ ณ วันที่ ${presDateStr}`,
+          extraHtml: `
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px;">
+              <div style="background:#ffffff;border:1px solid #e2e8f0;border-left:4px solid #166534;border-radius:8px;padding:14px;">
+                <div style="font-size:13px;font-weight:700;color:#166534;margin-bottom:6px;"><i class="fa-solid fa-clipboard-check"></i> 1. การกำกับติดตามแผนงาน</div>
+                <div style="font-size:12.5px;color:#334155;line-height:1.6;">
+                  - โครงการทั้งหมด ${totalProjs} โครงการ ความคืบหน้าเฉลี่ย ${avgProg}%<br>
+                  - งานย่อยแล้วเสร็จ ${doneTasks} จาก ${allTasks.length} กิจกรรม<br>
+                  - ติดตามอัปเดตความคืบหน้าและภาพถ่ายหน้างานประจำสัปดาห์
+                </div>
+              </div>
+              <div style="background:#ffffff;border:1px solid #e2e8f0;border-left:4px solid ${delayedTasksList.length > 0 ? '#dc2626' : '#0284c7'};border-radius:8px;padding:14px;">
+                <div style="font-size:13px;font-weight:700;color:${delayedTasksList.length > 0 ? '#dc2626' : '#0284c7'};margin-bottom:6px;"><i class="fa-solid fa-bolt"></i> 2. มาตรการเร่งรัดและแก้ไขปัญหา</div>
+                <div style="font-size:12.5px;color:#334155;line-height:1.6;">
+                  ${delayedTasksList.length > 0 ? `- เร่งรัดงานที่เกินกำหนดจำนวน <strong>${delayedTasksList.length} งาน</strong> พร้อมบันทึกเหตุผลการขยายเวลาหากจำเป็น<br>` : '- ไม่มีงานเกินกำหนดในขณะนี้<br>'}
+                  ${allIssues.filter(x => !x.resolved).length > 0 ? `- เสนอประเด็นรอพิจารณาในที่ประชุมจำนวน <strong>${allIssues.filter(x => !x.resolved).length} หัวข้อ</strong>` : '- ประเด็นปัญหาทั้งหมดได้รับการจัดการเรียบร้อยแล้ว'}
+                </div>
+              </div>
+            </div>
+          `
         }
       };
 
       const liveSlides = activeTopics.map(key => slideMap[key]).filter(Boolean);
+      window._latestLiveSlides = liveSlides;
       totalSlides = liveSlides.length;
       if (currentSlide > totalSlides) currentSlide = 1;
 
@@ -8193,13 +9452,53 @@
       const box = document.getElementById('slide-box');
       if (counter) counter.textContent = `สไลด์ ${currentSlide} / ${totalSlides}`;
       if (box && data) {
-        box.innerHTML = `
-          <span style="background: rgba(34, 197, 94, 0.2); color: #86efac; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600;">${data.badge}</span>
-          <h1 style="font-size: 28px; font-weight: 700; margin: 14px 0 8px; max-width: 820px;">${data.title}</h1>
-          <p style="font-size: 15px; color: #cbd5e1; max-width: 720px; line-height: 1.6;">${data.desc}</p>
-          ${data.extraHtml || ''}
-        `;
+        box.innerHTML = renderSlideCardHtml(data);
       }
+    }
+
+    function renderSlideCardHtml(data) {
+      return `
+        <div class="pres-slide-header">
+          <div>
+            <span class="pres-slide-badge"><i class="fa-solid fa-landmark"></i> ${data.badge}</span>
+            <h1 style="font-size: 22px; font-weight: 800; color: #0f172a; margin: 10px 0 4px;">${data.title}</h1>
+            <p style="font-size: 13px; color: #475569; margin: 0; line-height: 1.5;">${data.desc}</p>
+          </div>
+          <div style="font-size: 11.5px; color: #64748b; text-align: right; white-space: nowrap;">
+            <div><strong>คณะอุตสาหกรรมเกษตร</strong></div>
+            <div>มหาวิทยาลัยเกษตรศาสตร์</div>
+          </div>
+        </div>
+        ${data.extraHtml || ''}
+      `;
+    }
+
+    function printAllPresentationSlides() {
+      updateSlide();
+      const slides = window._latestLiveSlides || [];
+      const printBox = document.getElementById('print-all-slides-container');
+      if (!printBox || slides.length === 0) {
+        showToast('ไม่พบสไลด์สำหรับพิมพ์', 'warning');
+        return;
+      }
+
+      printBox.innerHTML = slides.map((s, idx) => `
+        <div class="print-slide-page">
+          ${renderSlideCardHtml(s)}
+          <div style="margin-top: 14px; text-align: right; font-size: 11px; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 6px;">
+            หน้า ${idx + 1} / ${slides.length} | Project Tracking System
+          </div>
+        </div>
+      `).join('');
+
+      document.body.classList.add('printing-slides');
+      const cleanup = () => {
+        document.body.classList.remove('printing-slides');
+        window.removeEventListener('afterprint', cleanup);
+      };
+      window.addEventListener('afterprint', cleanup);
+      window.print();
+      setTimeout(cleanup, 1500);
     }
 
     function togglePresentationFullscreen() {
@@ -9158,6 +10457,7 @@
     function updateGSheetStatusUI(statusText, badgeText, badgeBg, badgeColor) {
       const badge = document.getElementById('gsheet-status-badge');
       const lastEl = document.getElementById('gsheet-last-sync');
+      const headerSyncEl = document.getElementById('header-sync-text');
       if (badge && badgeText) {
         badge.textContent = badgeText;
         badge.style.background = badgeBg || '#e2e8f0';
@@ -9165,6 +10465,12 @@
       }
       if (lastEl && statusText) {
         lastEl.textContent = statusText;
+      }
+      if (headerSyncEl && statusText) {
+        const shortText = statusText
+          .replace('สถานะ: ใช้ข้อมูลในเบราว์เซอร์ (localStorage)', 'ในเครื่อง')
+          .replace('พร้อมซิงค์ข้อมูลกับ Google Sheets', 'พร้อมซิงค์ Cloud');
+        headerSyncEl.textContent = shortText;
       }
     }
 
@@ -9449,9 +10755,55 @@
       return changed;
     }
 
-    // --- 17. APP INITIALIZATION ---
+    // --- 17. APP INITIALIZATION & EXECUTIVE VIEW MODE ---
+    function isExecutiveViewMode() {
+      try {
+        return new URLSearchParams(window.location.search).get('mode') === 'exec';
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function copyExecutiveShareLink() {
+      const baseUrl = window.location.href.split('?')[0].split('#')[0];
+      const execUrl = `${baseUrl}?mode=exec`;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(execUrl).then(() => {
+          showToast('คัดลอกลิงก์สำหรับผู้บริหาร (?mode=exec) เรียบร้อยแล้ว', 'success');
+        }).catch(() => {
+          window.prompt('คัดลอกลิงก์สำหรับผู้บริหาร (ดูอย่างเดียว):', execUrl);
+        });
+      } else {
+        window.prompt('คัดลอกลิงก์สำหรับผู้บริหาร (ดูอย่างเดียว):', execUrl);
+      }
+    }
+
+    function applyExecutiveViewMode() {
+      if (!isExecutiveViewMode()) return;
+      document.body.classList.add('exec-view-mode');
+      sessionStorage.removeItem('pts_editor_unlocked');
+
+      // Lock navigation & editing actions strictly to Dashboard read-only
+      window.isEditorUnlocked = () => false;
+      window.openPinUnlockModal = () => showToast('โหมดสำหรับผู้บริหาร (ดูภาพรวมอย่างเดียว)', 'info');
+      window.openRoleSwitcherModal = () => {};
+      window.triggerProjectCoverUpload = () => {};
+      window.clearProjectCoverImage = () => {};
+      window.openUpdateTaskModal = () => showToast('โหมดสำหรับผู้บริหาร: ดูข้อมูลภาพรวมอย่างเดียว', 'info');
+      window.viewProjectTasks = (projId) => {
+        if (projId) selectProjectFromTable(projId);
+      };
+      window.filterByStatus = () => {};
+      const origNav = window.navigate;
+      window.navigate = function(pageId, navElem) {
+        if (pageId !== 'dashboard') return;
+        if (typeof origNav === 'function') origNav(pageId, navElem);
+      };
+    }
+
     function initApp() {
       try {
+        applyExecutiveViewMode();
         normalizeHistoryToTaworn(true);
         startLiveClock();
         document.querySelectorAll('.sidebar-nav .nav-item').forEach(el => {
