@@ -1834,6 +1834,98 @@
       overflow: visible !important;
     }
 
+    /* Monthly Calendar View (in #page-gantt) */
+    .cal-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding: 10px 14px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+    }
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      border-top: 1px solid #cbd5e1;
+      border-left: 1px solid #cbd5e1;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+    .cal-head-cell {
+      background: #f1f5f9;
+      color: #334155;
+      font-weight: 700;
+      font-size: 12px;
+      text-align: center;
+      padding: 8px 4px;
+      border-right: 1px solid #cbd5e1;
+      border-bottom: 1px solid #cbd5e1;
+    }
+    .cal-day-cell {
+      min-height: 102px;
+      padding: 6px;
+      border-right: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      background: #ffffff;
+    }
+    .cal-day-cell.cal-other-month {
+      background: #f8fafc;
+      color: #94a3b8;
+    }
+    .cal-day-cell.cal-today {
+      background: #f0fdf4;
+      box-shadow: inset 0 0 0 2px #16a34a;
+    }
+    .cal-day-num {
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #1e293b;
+    }
+    .cal-day-cell.cal-other-month .cal-day-num {
+      color: #94a3b8;
+      font-weight: 500;
+    }
+    .cal-today-tag {
+      font-size: 9.5px;
+      background: #16a34a;
+      color: #ffffff;
+      padding: 1px 6px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+    .cal-event-pill {
+      font-size: 10.5px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      cursor: pointer;
+      font-weight: 600;
+      border: 1px solid transparent;
+      transition: opacity 0.15s;
+    }
+    .cal-event-pill:hover { opacity: 0.85; }
+    .cal-ev-start { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+    .cal-ev-due { background: #fef3c7; color: #b45309; border-color: #fde68a; }
+    .cal-ev-delayed { background: #fee2e2; color: #dc2626; border-color: #fecaca; }
+    .cal-ev-done { background: #dcfce7; color: #15803d; border-color: #bbf7d0; }
+    @media (max-width: 768px) {
+      .cal-day-cell { min-height: 76px; padding: 4px; }
+      .cal-event-pill { font-size: 9.5px; padding: 1px 4px; }
+    }
+
     /* Modal System */
     .modal-overlay {
       position: fixed;
@@ -2996,7 +3088,11 @@
               <h2 style="font-size: 16px; font-weight: 700; color: #1e3a29;">Timeline ภาพรวมโครงการทั้งหมด (แผนงานปี 2567 - 2568)</h2>
               <p style="font-size: 12.5px; color: var(--text-muted);">คลิกดูงานย่อยในแต่ละโครงการเพื่อดูรายละเอียดและอัปเดตความคืบหน้า</p>
             </div>
-            <div style="display: flex; gap: 8px;">
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+              <div class="gantt-time-toggles" id="gantt-page-view-toggles">
+                <button type="button" class="time-toggle-btn active" id="btn-gantt-view-timeline" onclick="switchGanttPageView('timeline')"><i class="fa-solid fa-chart-gantt"></i> Timeline</button>
+                <button type="button" class="time-toggle-btn" id="btn-gantt-view-calendar" onclick="switchGanttPageView('calendar')"><i class="fa-regular fa-calendar-days"></i> ปฏิทินรายเดือน</button>
+              </div>
               <button class="btn btn-outline" onclick="window.print()"><i class="fa-solid fa-print"></i> พิมพ์แผนงาน</button>
             </div>
           </div>
@@ -3004,6 +3100,7 @@
           <div id="full-gantt-container" style="overflow-x: auto;">
             <!-- Generated full timeline table -->
           </div>
+          <div id="monthly-calendar-container" style="display: none;"></div>
         </div>
       </section>
 
@@ -3110,6 +3207,42 @@
               <tbody id="tasks-management-tbody">
                 <!-- Dynamically rendered by renderTasksManagementPage() -->
               </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Card 1.5: Contractor Site Entry/Exit Log Table -->
+        <div class="standard-card" id="contractor-logs-card">
+          <div class="toolbar-row">
+            <div>
+              <h2 style="font-size: 15px; font-weight: 700; color: #1e3a29;">
+                <i class="fa-solid fa-helmet-safety" style="color: var(--primary);"></i>
+                บันทึกการเข้า–ออกปฏิบัติงานผู้รับเหมา
+              </h2>
+              <p id="contractor-logs-summary" style="font-size: 12px; color: var(--text-muted);">
+                บันทึกวัน–เวลาเข้าปฏิบัติงานและจำนวนช่างของบริษัทผู้รับเหมา
+              </p>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button type="button" class="btn btn-outline" onclick="window.print()"><i class="fa-solid fa-print"></i> พิมพ์ตาราง</button>
+              <button type="button" class="btn btn-primary" onclick="openContractorLogModal()"><i class="fa-solid fa-plus"></i> บันทึกเข้า-ออกงาน</button>
+            </div>
+          </div>
+
+          <div style="overflow-x: auto; border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
+            <table class="data-table">
+              <thead>
+                <tr style="background: #f8fafc;">
+                  <th style="width: 110px;">วันที่</th>
+                  <th style="width: 125px;">เวลาเข้า – ออก</th>
+                  <th style="min-width: 190px;">บริษัท / หัวหน้าชุดช่าง</th>
+                  <th style="width: 90px; text-align: center;">จำนวนช่าง</th>
+                  <th style="min-width: 200px;">งาน / พื้นที่ปฏิบัติงาน</th>
+                  <th style="width: 150px;">ผู้บันทึก / ผู้อนุญาต</th>
+                  <th style="width: 90px; text-align: center;">จัดการ</th>
+                </tr>
+              </thead>
+              <tbody id="contractor-logs-tbody"></tbody>
             </table>
           </div>
         </div>
@@ -3789,6 +3922,66 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-outline" onclick="closeModal('projectModal')">ยกเลิก</button>
           <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> บันทึกข้อมูลโครงการ</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Add / Edit Contractor Entry/Exit Log -->
+  <div class="modal-overlay" id="contractorLogModal">
+    <div class="modal-box" style="max-width: 560px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="contractorLogModalTitle" style="display: flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-helmet-safety" style="color: var(--primary);"></i>
+          <span>บันทึกการเข้า–ออกปฏิบัติงานผู้รับเหมา</span>
+        </h3>
+        <button class="modal-close-btn" onclick="closeModal('contractorLogModal')">&times;</button>
+      </div>
+      <form id="contractorLogForm" onsubmit="saveContractorLog(event)">
+        <input type="hidden" id="conlog-edit-id">
+        <div class="modal-body" style="display: flex; flex-direction: column; gap: 12px;">
+          <div class="form-row">
+            <div class="form-group">
+              <label>วันที่ปฏิบัติงาน <span style="color: red;">*</span></label>
+              <input type="date" class="form-control" id="conlog-date" required>
+            </div>
+            <div class="form-group">
+              <label>จำนวนช่างที่เข้างาน (คน) <span style="color: red;">*</span></label>
+              <input type="number" class="form-control" id="conlog-workers" min="1" value="2" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>เวลาเข้า <span style="color: red;">*</span></label>
+              <input type="time" class="form-control" id="conlog-time-in" value="08:30" required>
+            </div>
+            <div class="form-group">
+              <label>เวลาออก</label>
+              <input type="time" class="form-control" id="conlog-time-out" value="16:30">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>ชื่อบริษัทผู้รับเหมา <span style="color: red;">*</span></label>
+              <input type="text" class="form-control" id="conlog-company" required placeholder="เช่น บริษัท ... จำกัด">
+            </div>
+            <div class="form-group">
+              <label>หัวหน้าชุดช่าง / ผู้ควบคุม</label>
+              <input type="text" class="form-control" id="conlog-lead" placeholder="ชื่อหัวหน้าช่าง">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>งาน / พื้นที่ที่เข้าดำเนินการ <span style="color: red;">*</span></label>
+            <input type="text" class="form-control" id="conlog-area" required placeholder="เช่น รื้อถอนอุปกรณ์ปล่องลิฟต์ ชั้น 1-4">
+          </div>
+          <div class="form-group">
+            <label>ผู้บันทึก / ผู้อนุญาตเข้าพื้นที่</label>
+            <input type="text" class="form-control" id="conlog-recorder" placeholder="ชื่อผู้บันทึก">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeModal('contractorLogModal')">ยกเลิก</button>
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> บันทึกข้อมูล</button>
         </div>
       </form>
     </div>
@@ -6321,6 +6514,155 @@
           </tr>
         `;
       });
+
+      renderContractorLogsTable(activeProj);
+    }
+
+    function renderContractorLogsTable(proj) {
+      const tbody = document.getElementById('contractor-logs-tbody');
+      const summaryEl = document.getElementById('contractor-logs-summary');
+      if (!tbody) return;
+      if (!proj) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:24px; color:#94a3b8;">กรุณาเลือกโครงการ</td></tr>`;
+        return;
+      }
+
+      const logs = Array.isArray(proj.contractorLogs) ? [...proj.contractorLogs] : [];
+      logs.sort((a, b) => (b.date || '').localeCompare(a.date || '') || (b.id || 0) - (a.id || 0));
+
+      if (summaryEl) {
+        if (logs.length === 0) {
+          summaryEl.textContent = `โครงการ "${proj.name}" ยังไม่มีบันทึกการเข้า–ออกงานของผู้รับเหมา`;
+        } else {
+          const latest = logs[0];
+          summaryEl.textContent = `เข้าปฏิบัติงานรวม ${logs.length} ครั้ง | ล่าสุด: ${latest.date || '-'} (ช่าง ${latest.workers || 0} คน)`;
+        }
+      }
+
+      if (logs.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align:center; padding:26px 16px; color:#94a3b8;">
+              ยังไม่มีบันทึกการเข้า–ออกปฏิบัติงานผู้รับเหมาในโครงการนี้
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = logs.map(log => `
+        <tr>
+          <td style="font-weight:600; white-space:nowrap;">${log.date || '-'}</td>
+          <td style="white-space:nowrap; color:#0369a1; font-weight:600;">${log.timeIn || '-'} – ${log.timeOut || '-'}</td>
+          <td>
+            <div style="font-weight:600; color:#1e293b;">${log.company || '-'}</div>
+            ${log.lead ? `<div style="font-size:11px; color:#64748b;">หัวหน้าช่าง: ${log.lead}</div>` : ''}
+          </td>
+          <td style="text-align:center; font-weight:700; color:#166534;">${log.workers || 0} คน</td>
+          <td>${log.area || '-'}</td>
+          <td style="font-size:12px; color:#475569;">${log.recorder || '-'}</td>
+          <td style="text-align:center; white-space:nowrap;">
+            <button type="button" class="btn btn-outline" style="padding:4px 8px; font-size:11.5px;" onclick="openContractorLogModal(${log.id})" title="แก้ไขรายการ"><i class="fa-regular fa-pen-to-square"></i></button>
+            <button type="button" class="btn btn-outline" style="padding:4px 8px; font-size:11.5px; color:#ef4444;" onclick="deleteContractorLog(${log.id})" title="ลบรายการ"><i class="fa-regular fa-trash-can"></i></button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function openContractorLogModal(logId = null) {
+      const proj = appState.projects.find(p => p.id === currentTasksProject) || appState.projects[0];
+      if (!proj) {
+        showToast('กรุณาสร้างโครงการก่อน', 'warning');
+        return;
+      }
+
+      const form = document.getElementById('contractorLogForm');
+      if (form) form.reset();
+
+      const editIdEl = document.getElementById('conlog-edit-id');
+      const titleEl = document.getElementById('contractorLogModalTitle');
+      const dateEl = document.getElementById('conlog-date');
+      const timeInEl = document.getElementById('conlog-time-in');
+      const timeOutEl = document.getElementById('conlog-time-out');
+      const compEl = document.getElementById('conlog-company');
+      const leadEl = document.getElementById('conlog-lead');
+      const workersEl = document.getElementById('conlog-workers');
+      const areaEl = document.getElementById('conlog-area');
+      const recEl = document.getElementById('conlog-recorder');
+
+      const existing = logId && Array.isArray(proj.contractorLogs)
+        ? proj.contractorLogs.find(l => l.id === parseInt(logId, 10))
+        : null;
+
+      if (existing) {
+        if (editIdEl) editIdEl.value = existing.id;
+        if (titleEl) titleEl.innerHTML = '<i class="fa-solid fa-helmet-safety" style="color: var(--primary);"></i><span>แก้ไขบันทึกการเข้า–ออกปฏิบัติงานผู้รับเหมา</span>';
+        if (dateEl) dateEl.value = existing.date || getBangkokTodayStr();
+        if (timeInEl) timeInEl.value = existing.timeIn || '08:30';
+        if (timeOutEl) timeOutEl.value = existing.timeOut || '16:30';
+        if (compEl) compEl.value = existing.company || '';
+        if (leadEl) leadEl.value = existing.lead || '';
+        if (workersEl) workersEl.value = existing.workers || 1;
+        if (areaEl) areaEl.value = existing.area || '';
+        if (recEl) recEl.value = existing.recorder || '';
+      } else {
+        if (editIdEl) editIdEl.value = '';
+        if (titleEl) titleEl.innerHTML = '<i class="fa-solid fa-helmet-safety" style="color: var(--primary);"></i><span>บันทึกการเข้า–ออกปฏิบัติงานผู้รับเหมา</span>';
+        if (dateEl) dateEl.value = getBangkokTodayStr();
+        if (timeInEl) timeInEl.value = '08:30';
+        if (timeOutEl) timeOutEl.value = '16:30';
+        if (compEl) compEl.value = proj.contractorCompany || '';
+        if (leadEl) leadEl.value = proj.contractorContact || '';
+        if (workersEl) workersEl.value = 2;
+        if (areaEl) areaEl.value = '';
+        if (recEl) recEl.value = appState.currentUser ? appState.currentUser.name : 'นายถาวร ไพรสิทธิ์';
+      }
+
+      openModal('contractorLogModal');
+    }
+
+    function saveContractorLog(e) {
+      e.preventDefault();
+      const proj = appState.projects.find(p => p.id === currentTasksProject) || appState.projects[0];
+      if (!proj) return;
+      if (!Array.isArray(proj.contractorLogs)) proj.contractorLogs = [];
+
+      const editId = document.getElementById('conlog-edit-id')?.value;
+      const entry = {
+        id: editId ? parseInt(editId, 10) : Date.now(),
+        date: document.getElementById('conlog-date')?.value || getBangkokTodayStr(),
+        timeIn: document.getElementById('conlog-time-in')?.value || '08:30',
+        timeOut: document.getElementById('conlog-time-out')?.value || '',
+        company: (document.getElementById('conlog-company')?.value || '').trim(),
+        lead: (document.getElementById('conlog-lead')?.value || '').trim(),
+        workers: parseInt(document.getElementById('conlog-workers')?.value || '1', 10) || 1,
+        area: (document.getElementById('conlog-area')?.value || '').trim(),
+        recorder: (document.getElementById('conlog-recorder')?.value || '').trim()
+      };
+
+      if (editId) {
+        const idx = proj.contractorLogs.findIndex(l => l.id === parseInt(editId, 10));
+        if (idx !== -1) proj.contractorLogs[idx] = entry;
+      } else {
+        proj.contractorLogs.unshift(entry);
+      }
+
+      addAuditLog('บันทึกเข้า-ออกผู้รับเหมา', `${entry.company} (${entry.workers} คน) วันที่ ${entry.date} เวลา ${entry.timeIn}-${entry.timeOut} โครงการ "${proj.name}"`);
+      saveState();
+      closeModal('contractorLogModal');
+      renderContractorLogsTable(proj);
+      showToast('บันทึกข้อมูลการเข้า–ออกงานผู้รับเหมาเรียบร้อยแล้ว', 'success');
+    }
+
+    function deleteContractorLog(logId) {
+      const proj = appState.projects.find(p => p.id === currentTasksProject) || appState.projects[0];
+      if (!proj || !Array.isArray(proj.contractorLogs)) return;
+      if (!confirm('ยืนยันลบรายการบันทึกเข้า–ออกงานนี้หรือไม่?')) return;
+      proj.contractorLogs = proj.contractorLogs.filter(l => l.id !== parseInt(logId, 10));
+      addAuditLog('ลบเข้า-ออกผู้รับเหมา', `ลบรายการเข้า–ออกงานในโครงการ "${proj.name}"`);
+      saveState();
+      renderContractorLogsTable(proj);
+      showToast('ลบรายการเรียบร้อยแล้ว', 'info');
     }
 
     function setTasksScale(scale, btn) {
@@ -6970,6 +7312,7 @@
       renderGanttDashboard();
       renderFullGantt();
       renderKanban();
+      renderNotifications();
 
       showToast(`บันทึกความคืบหน้า "${task.title}" เป็น ${newProg}% สำเร็จแล้ว`, 'success');
     }
@@ -7476,6 +7819,7 @@
       renderGanttDashboard();
       renderFullGantt();
       renderKanban();
+      renderNotifications();
 
       showToast(`บันทึกผลหน้างาน "${task.title}" สำเร็จแล้ว!`, 'success');
     }
@@ -7635,6 +7979,7 @@
           </tr>
         `;
       });
+
     }
 
     function getFilteredProjects() {
@@ -8091,6 +8436,174 @@
 
       html += `</tbody></table>`;
       container.innerHTML = html;
+
+      if (currentGanttPageView === 'calendar') {
+        renderMonthlyCalendar();
+      }
+    }
+
+    // --- 8B. MONTHLY CALENDAR VIEW (in #page-gantt) ---
+    let currentGanttPageView = 'timeline';
+    let currentCalYear = getBangkokTodayDate().getFullYear();
+    let currentCalMonth = getBangkokTodayDate().getMonth();
+    let currentCalProjId = 'all';
+
+    function switchGanttPageView(mode) {
+      currentGanttPageView = mode === 'calendar' ? 'calendar' : 'timeline';
+      const timelineBox = document.getElementById('full-gantt-container');
+      const calBox = document.getElementById('monthly-calendar-container');
+      const btnTime = document.getElementById('btn-gantt-view-timeline');
+      const btnCal = document.getElementById('btn-gantt-view-calendar');
+
+      if (btnTime) btnTime.classList.toggle('active', currentGanttPageView === 'timeline');
+      if (btnCal) btnCal.classList.toggle('active', currentGanttPageView === 'calendar');
+
+      if (timelineBox) timelineBox.style.display = currentGanttPageView === 'timeline' ? 'block' : 'none';
+      if (calBox) calBox.style.display = currentGanttPageView === 'calendar' ? 'block' : 'none';
+
+      if (currentGanttPageView === 'calendar') {
+        renderMonthlyCalendar();
+      }
+    }
+
+    function changeCalendarMonth(delta) {
+      currentCalMonth += delta;
+      if (currentCalMonth < 0) {
+        currentCalMonth = 11;
+        currentCalYear--;
+      } else if (currentCalMonth > 11) {
+        currentCalMonth = 0;
+        currentCalYear++;
+      }
+      renderMonthlyCalendar();
+    }
+
+    function jumpCalendarToday() {
+      const todayD = getBangkokTodayDate();
+      currentCalYear = todayD.getFullYear();
+      currentCalMonth = todayD.getMonth();
+      renderMonthlyCalendar();
+    }
+
+    function onCalendarProjFilterChange(val) {
+      currentCalProjId = val || 'all';
+      renderMonthlyCalendar();
+    }
+
+    function renderMonthlyCalendar() {
+      const container = document.getElementById('monthly-calendar-container');
+      if (!container) return;
+
+      const thaiMonthsFull = [
+        'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
+        'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'
+      ];
+      const dayNames = ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'];
+      const projects = appState.projects || [];
+      const todayStr = getBangkokTodayStr();
+
+      // Build map of dateStr -> events[]
+      const eventsByDate = {};
+      const addEv = (dateStr, ev) => {
+        if (!dateStr) return;
+        if (!eventsByDate[dateStr]) eventsByDate[dateStr] = [];
+        eventsByDate[dateStr].push(ev);
+      };
+
+      projects.forEach(p => {
+        if (currentCalProjId !== 'all' && p.id !== parseInt(currentCalProjId, 10)) return;
+        (p.tasks || []).forEach(t => {
+          const sched = evaluateTaskSchedule(t, p);
+          if (t.startDate) {
+            addEv(t.startDate, {
+              projId: p.id,
+              taskId: t.id,
+              cls: sched.progress === 100 ? 'cal-ev-done' : 'cal-ev-start',
+              label: `▶ เริ่ม: ${t.title}`,
+              tip: `${p.name} | เริ่มงาน: ${t.title} (${sched.progress}%)`
+            });
+          }
+          if (sched.currentEnd) {
+            let cls = 'cal-ev-due';
+            let prefix = '⏰ ครบกำหนด:';
+            if (sched.isDelayed) {
+              cls = 'cal-ev-delayed';
+              prefix = `⚠ ล่าช้า ${sched.delayDays} วัน:`;
+            } else if (sched.progress === 100) {
+              cls = 'cal-ev-done';
+              prefix = '✔ เสร็จ:';
+            }
+            addEv(sched.currentEnd, {
+              projId: p.id,
+              taskId: t.id,
+              cls,
+              label: `${prefix} ${t.title}`,
+              tip: `${p.name} | ${t.title} | กำหนดส่ง: ${sched.currentEnd} | สถานะ: ${sched.statusLabel}`
+            });
+          }
+        });
+      });
+
+      const firstDay = new Date(currentCalYear, currentCalMonth, 1);
+      const startOffset = firstDay.getDay();
+      const daysInMonth = new Date(currentCalYear, currentCalMonth + 1, 0).getDate();
+      const totalCells = Math.ceil((startOffset + daysInMonth) / 7) * 7;
+
+      const projOptions = `<option value="all">ทุกโครงการ (${projects.length})</option>` +
+        projects.map(p => `<option value="${p.id}" ${String(currentCalProjId) === String(p.id) ? 'selected' : ''}>${p.name}</option>`).join('');
+
+      let html = `
+        <div class="cal-toolbar">
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <button type="button" class="btn btn-outline" style="padding: 5px 10px; font-size: 12px;" onclick="changeCalendarMonth(-1)"><i class="fa-solid fa-chevron-left"></i> เดือนก่อน</button>
+            <span style="font-size: 15px; font-weight: 800; color: #166534; min-width: 150px; text-align: center;">
+              ${thaiMonthsFull[currentCalMonth]} ${currentCalYear + 543}
+            </span>
+            <button type="button" class="btn btn-outline" style="padding: 5px 10px; font-size: 12px;" onclick="changeCalendarMonth(1)">เดือนถัดไป <i class="fa-solid fa-chevron-right"></i></button>
+            <button type="button" class="btn btn-primary" style="padding: 5px 10px; font-size: 12px;" onclick="jumpCalendarToday()">วันนี้</button>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <select class="form-control" style="padding: 5px 10px; font-size: 12px; min-width: 200px;" onchange="onCalendarProjFilterChange(this.value)">
+              ${projOptions}
+            </select>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap; font-size: 11px;">
+              <span class="cal-event-pill cal-ev-start" style="cursor:default;">▶ เริ่มงาน</span>
+              <span class="cal-event-pill cal-ev-due" style="cursor:default;">⏰ ครบกำหนด</span>
+              <span class="cal-event-pill cal-ev-delayed" style="cursor:default;">⚠ ล่าช้า</span>
+              <span class="cal-event-pill cal-ev-done" style="cursor:default;">✔ เสร็จแล้ว</span>
+            </div>
+          </div>
+        </div>
+        <div class="cal-grid">
+          ${dayNames.map(d => `<div class="cal-head-cell">${d}</div>`).join('')}
+      `;
+
+      for (let cell = 0; cell < totalCells; cell++) {
+        const dObj = new Date(currentCalYear, currentCalMonth, 1 - startOffset + cell);
+        const y = dObj.getFullYear();
+        const m = dObj.getMonth();
+        const dayNum = dObj.getDate();
+        const dateStr = `${y}-${String(m + 1).padStart(2, '0')}-${String(dayNum).padStart(2, '0')}`;
+        const isOtherMonth = m !== currentCalMonth;
+        const isToday = dateStr === todayStr;
+        const evs = eventsByDate[dateStr] || [];
+
+        html += `
+          <div class="cal-day-cell ${isOtherMonth ? 'cal-other-month' : ''} ${isToday ? 'cal-today' : ''}">
+            <div class="cal-day-num">
+              <span>${dayNum}</span>
+              ${isToday ? '<span class="cal-today-tag">วันนี้</span>' : ''}
+            </div>
+            ${evs.slice(0, 4).map(ev => `
+              <div class="cal-event-pill ${ev.cls}" onclick="openUpdateTaskModal(${ev.taskId}, ${ev.projId})" title="${ev.tip}">${ev.label}</div>
+            `).join('')}
+            ${evs.length > 4 ? `<div style="font-size:10px;color:#64748b;padding-left:4px;">+ อีก ${evs.length - 4} รายการ</div>` : ''}
+          </div>
+        `;
+      }
+
+      html += `</div>`;
+      container.innerHTML = html;
     }
 
     // --- 9. KANBAN BOARD ---
@@ -8473,6 +8986,7 @@
           </tr>
         `;
       });
+
     }
 
     function openUploadDocModal() {
@@ -9840,6 +10354,7 @@
           </tr>
         `;
       });
+
     }
 
     function openAddUserModal() {
@@ -9903,6 +10418,7 @@
           </tr>
         `;
       });
+
     }
 
     function clearAuditLogs() {
@@ -10593,6 +11109,7 @@
       'openUpdateTaskModal', 'saveModalTaskProgress', 'quickUpdateTaskProgress',
       'triggerProjectCoverUpload', 'clearProjectCoverImage',
       'openSiteProgressModal', 'saveSiteProgress', 'openResolutionModal', 'saveMeetingResolution',
+      'openContractorLogModal', 'saveContractorLog', 'deleteContractorLog',
       'openAddExpenseModal', 'deleteExpense', 'saveExpense',
       'openAddDocumentModal', 'deleteDocument', 'saveDocument',
       'loadDemoData', 'resetToDefaultData', 'restoreData',
@@ -10608,6 +11125,9 @@
         if (typeof orig === 'function' && !orig.__ptsGuarded) {
           const wrapped = function(...args) {
             if (!isEditorUnlocked()) {
+              if (args[0] && typeof args[0].preventDefault === 'function') {
+                args[0].preventDefault();
+              }
               openPinUnlockModal(() => orig.apply(this, args));
               return;
             }
