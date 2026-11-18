@@ -2511,9 +2511,11 @@
       .dashboard-card, .standard-card { box-shadow: none !important; border: 1px solid #ccc !important; }
       .print-doc-header { display: block !important; }
       .print-signature-section { display: grid !important; }
+      body.printing-slides .main-wrapper,
+      body.printing-slides .modal-overlay,
       body.printing-slides #page-presentation > .standard-card,
       body.printing-slides #presentation-fullscreen-box { display: none !important; }
-      body.printing-slides #print-all-slides-container { display: block !important; }
+      body.printing-slides #print-all-slides-container { display: block !important; width: 100%; }
       body.printing-slides .print-slide-page {
         border: 1px solid #cbd5e1;
         border-top: 5px solid #166534;
@@ -3224,6 +3226,7 @@
               </p>
             </div>
             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button type="button" class="btn btn-outline" onclick="openExportCenterModal('contractorLogs')"><i class="fa-solid fa-file-arrow-down"></i> ส่งออกข้อมูล</button>
               <button type="button" class="btn btn-outline" onclick="window.print()"><i class="fa-solid fa-print"></i> พิมพ์ตาราง</button>
               <button type="button" class="btn btn-primary" onclick="openContractorLogModal()"><i class="fa-solid fa-plus"></i> บันทึกเข้า-ออกงาน</button>
             </div>
@@ -3416,7 +3419,8 @@
               <h2 style="font-size: 16px; font-weight: 700; color: #1e3a29;">ศูนย์สร้างและส่งออกรายงาน (Executive & Operational Reports)</h2>
               <p style="font-size: 12.5px; color: var(--text-muted);">เลือกประเภทรายงานเพื่อแสดงผลแบบเรียลไทม์ พร้อมพิมพ์ออก PDF หรือส่งออก Excel (CSV)</p>
             </div>
-            <div style="display: flex; gap: 8px;">
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button class="btn btn-outline" onclick="openExportCenterModal()"><i class="fa-solid fa-file-arrow-down"></i> ส่งออกข้อมูลแยกประเภท...</button>
               <button class="btn btn-outline" onclick="exportProjectsCSV()"><i class="fa-solid fa-file-excel"></i> ส่งออก Excel (CSV)</button>
               <button class="btn btn-primary" onclick="window.print()"><i class="fa-solid fa-print"></i> พิมพ์รายงานสรุป</button>
             </div>
@@ -3527,7 +3531,6 @@
             </div>
           </div>
         </div>
-        <div id="print-all-slides-container"></div>
       </section>
 
       <!-- ========================================================
@@ -3984,6 +3987,84 @@
           <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> บันทึกข้อมูล</button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- Modal: Selective Multi-Format Export Center -->
+  <div class="modal-overlay" id="exportCenterModal">
+    <div class="modal-box" style="max-width: 600px;">
+      <div class="modal-header">
+        <h3 class="modal-title" style="display: flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-file-arrow-down" style="color: var(--primary);"></i>
+          <span>ส่งออกข้อมูลแยกตามประเภท (Selective Export)</span>
+        </h3>
+        <button class="modal-close-btn" onclick="closeModal('exportCenterModal')">&times;</button>
+      </div>
+      <div class="modal-body" style="display: flex; flex-direction: column; gap: 14px;">
+        <div class="form-group" style="margin-bottom: 0;">
+          <label>1. เลือกขอบเขตโครงการ</label>
+          <select class="form-control" id="exp-proj-select">
+            <option value="all">ทุกโครงการ</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <label style="margin: 0;">2. เลือกประเภทข้อมูลที่ต้องการส่งออก</label>
+            <div style="display: flex; gap: 6px;">
+              <button type="button" class="quick-pct-btn" onclick="document.querySelectorAll('.exp-dataset-chk').forEach(c => c.checked = true)">เลือกทั้งหมด</button>
+              <button type="button" class="quick-pct-btn" onclick="document.querySelectorAll('.exp-dataset-chk').forEach(c => c.checked = false)">ล้างทั้งหมด</button>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: #f8fafc; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-size: 12.5px;">
+            <label style="display: flex; align-items: center; gap: 7px; font-weight: 500; cursor: pointer;">
+              <input type="checkbox" class="exp-dataset-chk" value="projects" checked style="accent-color: #166534;"> ภาพรวมโครงการ
+            </label>
+            <label style="display: flex; align-items: center; gap: 7px; font-weight: 500; cursor: pointer;">
+              <input type="checkbox" class="exp-dataset-chk" value="tasks" checked style="accent-color: #166534;"> ข้อมูลติดตามงานย่อย
+            </label>
+            <label style="display: flex; align-items: center; gap: 7px; font-weight: 500; cursor: pointer;">
+              <input type="checkbox" class="exp-dataset-chk" value="contractorLogs" checked style="accent-color: #166534;"> ตารางเข้า–ออกผู้รับเหมา
+            </label>
+            <label style="display: flex; align-items: center; gap: 7px; font-weight: 500; cursor: pointer;">
+              <input type="checkbox" class="exp-dataset-chk" value="expenses" style="accent-color: #166534;"> รายการเบิกจ่ายงบประมาณ
+            </label>
+            <label style="display: flex; align-items: center; gap: 7px; font-weight: 500; cursor: pointer;">
+              <input type="checkbox" class="exp-dataset-chk" value="issues" style="accent-color: #166534;"> ประเด็นปัญหา &amp; มติ
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 0;">
+          <label>3. เลือกรูปแบบไฟล์ที่ต้องการ</label>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 8px; font-size: 12.5px;">
+            <label style="display: flex; align-items: center; gap: 7px; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer; background: #fff;">
+              <input type="radio" name="exp-format" value="xls" checked style="accent-color: #166534;">
+              <span><i class="fa-solid fa-file-excel" style="color: #16a34a;"></i> Excel (`.xls`)</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 7px; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer; background: #fff;">
+              <input type="radio" name="exp-format" value="csv" style="accent-color: #166534;">
+              <span><i class="fa-solid fa-file-csv" style="color: #0284c7;"></i> CSV (`.csv`)</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 7px; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer; background: #fff;">
+              <input type="radio" name="exp-format" value="doc" style="accent-color: #166534;">
+              <span><i class="fa-solid fa-file-word" style="color: #2563eb;"></i> Word (`.doc`)</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 7px; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer; background: #fff;">
+              <input type="radio" name="exp-format" value="json" style="accent-color: #166534;">
+              <span><i class="fa-solid fa-file-code" style="color: #7c3aed;"></i> JSON (`.json`)</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 7px; padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer; background: #fff;">
+              <input type="radio" name="exp-format" value="pdf" style="accent-color: #166534;">
+              <span><i class="fa-solid fa-file-pdf" style="color: #dc2626;"></i> PDF / พิมพ์</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" onclick="closeModal('exportCenterModal')">ยกเลิก</button>
+        <button type="button" class="btn btn-primary" onclick="runSelectiveExport()"><i class="fa-solid fa-download"></i> ดาวน์โหลด / ส่งออก</button>
+      </div>
     </div>
   </div>
 
@@ -10227,6 +10308,256 @@
       showToast('ส่งข้อความแจ้งเตือนเข้า LINE Official Account จำลองสำเร็จแล้ว!', 'success');
     }
 
+    // --- 14B. SELECTIVE MULTI-FORMAT EXPORT CENTER ---
+    function openExportCenterModal(defaultDataset = null) {
+      const sel = document.getElementById('exp-proj-select');
+      if (sel) {
+        const projects = appState.projects || [];
+        sel.innerHTML = `<option value="all">ทุกโครงการ (${projects.length} โครงการ)</option>` +
+          projects.map(p => `<option value="${p.id}">${p.code ? p.code + ' - ' : ''}${p.name}</option>`).join('');
+        if (defaultDataset === 'contractorLogs' && currentTasksProject) {
+          sel.value = String(currentTasksProject);
+        }
+      }
+
+      if (defaultDataset) {
+        document.querySelectorAll('.exp-dataset-chk').forEach(chk => {
+          chk.checked = (chk.value === defaultDataset);
+        });
+      }
+
+      openModal('exportCenterModal');
+    }
+
+    function collectExportDataset(datasetKey, projIdFilter) {
+      const projects = (appState.projects || []).filter(p =>
+        projIdFilter === 'all' || p.id === parseInt(projIdFilter, 10)
+      );
+
+      if (datasetKey === 'projects') {
+        const stMap = {
+          pending: 'รออนุมัติ', planned: 'รอดำเนินการ', inprogress: 'กำลังดำเนินการ',
+          duesoon: 'ใกล้ครบกำหนด', delayed: 'ล่าช้า', completed: 'เสร็จสิ้น', cancelled: 'ยกเลิก'
+        };
+        return {
+          key: 'projects',
+          title: 'ข้อมูลภาพรวมโครงการ',
+          headers: ['รหัสโครงการ', 'ชื่อโครงการ', 'หน่วยงาน', 'ปีงบประมาณ', 'ผู้รับผิดชอบ', 'บริษัทผู้รับเหมา', 'เลขที่สัญญา', 'งบประมาณ (บาท)', 'เบิกจ่ายแล้ว (บาท)', 'คงเหลือ (บาท)', 'ความคืบหน้า (%)', 'สถานะ', 'วันเริ่มต้น', 'วันสิ้นสุด'],
+          rows: projects.map(p => {
+            const b = parseFloat(p.budget) || 0;
+            const sp = calculateProjectSpent(p.id);
+            const st = evaluateProjectStatus(p);
+            return [
+              p.code || '', p.name || '', p.department || '', p.fiscalYear || '', p.manager || '',
+              p.contractorCompany || '', p.contractNo || '', b, sp, b - sp,
+              p.progress || 0, stMap[st] || st, p.startDate || '', p.endDate || ''
+            ];
+          })
+        };
+      }
+
+      if (datasetKey === 'tasks') {
+        const rows = [];
+        projects.forEach(p => {
+          sortProjectTasksByDate([...(p.tasks || [])]).forEach((t, idx) => {
+            const sc = evaluateTaskSchedule(t, p);
+            rows.push([
+              p.name || '', idx + 1, t.title || '', t.description || '', t.assignee || '',
+              t.startDate || '', sc.baselineEnd || '', sc.currentEnd || '', sc.actualEnd || '',
+              sc.progress, sc.statusLabel, sc.delayDays || 0, t.problems || '', t.solutions || ''
+            ]);
+          });
+        });
+        return {
+          key: 'tasks',
+          title: 'ข้อมูลติดตามงานย่อย',
+          headers: ['โครงการ', 'ลำดับ', 'หัวข้องาน', 'รายละเอียดงาน (Scope)', 'ผู้รับผิดชอบ', 'วันเริ่มต้น', 'แผนเดิม', 'แผนปัจจุบัน', 'วันเสร็จจริง', 'ความคืบหน้า (%)', 'สถานะ', 'ล่าช้า (วัน)', 'ปัญหา', 'แนวทางแก้ไข'],
+          rows
+        };
+      }
+
+      if (datasetKey === 'contractorLogs') {
+        const rows = [];
+        projects.forEach(p => {
+          const logs = Array.isArray(p.contractorLogs) ? [...p.contractorLogs] : [];
+          logs.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+          logs.forEach(l => {
+            rows.push([
+              p.name || '', l.date || '', l.timeIn || '', l.timeOut || '',
+              l.company || '', l.lead || '', l.workers || 0, l.area || '', l.recorder || ''
+            ]);
+          });
+        });
+        return {
+          key: 'contractorLogs',
+          title: 'ตารางบันทึกการเข้า–ออกงานผู้รับเหมา',
+          headers: ['โครงการ', 'วันที่', 'เวลาเข้า', 'เวลาออก', 'บริษัทผู้รับเหมา', 'หัวหน้าชุดช่าง', 'จำนวนช่าง (คน)', 'งาน / พื้นที่ปฏิบัติงาน', 'ผู้บันทึก'],
+          rows
+        };
+      }
+
+      if (datasetKey === 'expenses') {
+        const projIds = new Set(projects.map(p => p.id));
+        const rows = (appState.expenses || [])
+          .filter(e => projIdFilter === 'all' || projIds.has(e.projectId))
+          .map(e => {
+            const p = (appState.projects || []).find(pr => pr.id === e.projectId);
+            return [e.date || '', p ? p.name : 'ทั่วไป', e.category || '', e.title || '', parseFloat(e.amount) || 0, e.payee || ''];
+          });
+        return {
+          key: 'expenses',
+          title: 'รายการเบิกจ่ายงบประมาณ',
+          headers: ['วันที่ใช้จ่าย', 'โครงการ', 'หมวดหมู่', 'รายการค่าใช้จ่าย', 'จำนวนเงิน (บาท)', 'ผู้ขอเบิก'],
+          rows
+        };
+      }
+
+      if (datasetKey === 'issues') {
+        const rows = [];
+        projects.forEach(p => {
+          (p.tasks || []).forEach(t => {
+            if (t.problems || (t.consultation && t.consultation.needed)) {
+              rows.push([
+                p.name || '', t.title || '', (t.consultation && t.consultation.topic) || t.problems || '',
+                t.problemImpact || '', t.solutions || '',
+                (t.consultation && t.consultation.status === 'resolved') ? 'ได้รับมติแล้ว' : 'รอพิจารณา'
+              ]);
+            }
+          });
+        });
+        return {
+          key: 'issues',
+          title: 'ประเด็นปัญหาและมติที่ประชุม',
+          headers: ['โครงการ', 'หัวข้องาน', 'ประเด็นปัญหา', 'ผลกระทบ', 'แนวทางแก้ไข', 'สถานะมติ'],
+          rows
+        };
+      }
+
+      return null;
+    }
+
+    function triggerBlobDownload(content, mimeType, filename) {
+      const blob = new Blob([content], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    function escHtmlExport(val) {
+      return String(val === null || val === undefined ? '' : val)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function runSelectiveExport() {
+      const projFilter = document.getElementById('exp-proj-select')?.value || 'all';
+      const selectedKeys = Array.from(document.querySelectorAll('.exp-dataset-chk:checked')).map(c => c.value);
+      const fmt = document.querySelector('input[name="exp-format"]:checked')?.value || 'xls';
+
+      if (selectedKeys.length === 0) {
+        showToast('กรุณาเลือกประเภทข้อมูลอย่างน้อย 1 รายการ', 'warning');
+        return;
+      }
+
+      const datasets = selectedKeys.map(k => collectExportDataset(k, projFilter)).filter(Boolean);
+      const dateTag = getBangkokTodayStr();
+
+      if (fmt === 'csv') {
+        datasets.forEach((ds, idx) => {
+          const csvLines = [
+            ds.headers.map(h => `"${String(h).replace(/"/g, '""')}"`).join(','),
+            ...ds.rows.map(r => r.map(c => `"${String(c === null || c === undefined ? '' : c).replace(/"/g, '""')}"`).join(','))
+          ].join('\r\n');
+          setTimeout(() => {
+            triggerBlobDownload('\uFEFF' + csvLines, 'text/csv;charset=utf-8;', `pts_${ds.key}_${dateTag}.csv`);
+          }, idx * 200);
+        });
+        showToast(`ส่งออกไฟล์ CSV จำนวน ${datasets.length} ไฟล์เรียบร้อยแล้ว`, 'success');
+      } else if (fmt === 'json') {
+        const payload = {};
+        datasets.forEach(ds => {
+          payload[ds.key] = {
+            title: ds.title,
+            exportedAt: new Date().toISOString(),
+            columns: ds.headers,
+            records: ds.rows.map(r => {
+              const obj = {};
+              ds.headers.forEach((h, i) => { obj[h] = r[i]; });
+              return obj;
+            })
+          };
+        });
+        triggerBlobDownload(JSON.stringify(payload, null, 2), 'application/json;charset=utf-8;', `pts_export_${dateTag}.json`);
+        showToast('ส่งออกไฟล์ JSON เรียบร้อยแล้ว', 'success');
+      } else if (fmt === 'xls' || fmt === 'doc') {
+        const isWord = fmt === 'doc';
+        const sectionsHtml = datasets.map(ds => `
+          <h2 style="color:#166534;font-size:15pt;margin:16px 0 6px;">${escHtmlExport(ds.title)} (${ds.rows.length} รายการ)</h2>
+          <table border="1" cellspacing="0" cellpadding="6" style="border-collapse:collapse;width:100%;font-size:10.5pt;">
+            <thead>
+              <tr style="background:#166534;color:#ffffff;font-weight:bold;">
+                ${ds.headers.map(h => `<th>${escHtmlExport(h)}</th>`).join('')}
+              </tr>
+            </thead>
+            <tbody>
+              ${ds.rows.length === 0
+                ? `<tr><td colspan="${ds.headers.length}" align="center" style="color:#64748b;">ไม่มีข้อมูล</td></tr>`
+                : ds.rows.map(r => `<tr>${r.map(c => `<td>${escHtmlExport(c)}</td>`).join('')}</tr>`).join('')}
+            </tbody>
+          </table>
+        `).join('<br>');
+
+        const docHtml = `
+          <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+          <head><meta charset="utf-8"><style>body{font-family:'TH SarabunPSK','Sarabun',sans-serif;}</style></head>
+          <body>
+            <h1 style="color:#14532d;font-size:18pt;margin-bottom:4px;">รายงานข้อมูลระบบติดตามโครงการ (Project Tracking System)</h1>
+            <p style="color:#475569;font-size:11pt;margin-top:0;">คณะอุตสาหกรรมเกษตร มหาวิทยาลัยเกษตรศาสตร์ | วันที่ส่งออก: ${dateTag}</p>
+            ${sectionsHtml}
+          </body></html>
+        `;
+        const mime = isWord ? 'application/msword;charset=utf-8;' : 'application/vnd.ms-excel;charset=utf-8;';
+        const ext = isWord ? 'doc' : 'xls';
+        triggerBlobDownload('\uFEFF' + docHtml, mime, `pts_report_${dateTag}.${ext}`);
+        showToast(`ส่งออกไฟล์ ${isWord ? 'Word (.doc)' : 'Excel (.xls)'} เรียบร้อยแล้ว`, 'success');
+      } else if (fmt === 'pdf') {
+        const printBox = document.getElementById('print-all-slides-container');
+        if (!printBox) return;
+        printBox.innerHTML = datasets.map(ds => `
+          <div class="print-slide-page">
+            <h2 style="color:#166534;font-size:16px;margin:0 0 8px;">${escHtmlExport(ds.title)} (${ds.rows.length} รายการ)</h2>
+            <table class="data-table" style="font-size:11.5px;width:100%;">
+              <thead>
+                <tr>${ds.headers.map(h => `<th>${escHtmlExport(h)}</th>`).join('')}</tr>
+              </thead>
+              <tbody>
+                ${ds.rows.length === 0
+                  ? `<tr><td colspan="${ds.headers.length}" style="text-align:center;color:#94a3b8;">ไม่มีข้อมูล</td></tr>`
+                  : ds.rows.map(r => `<tr>${r.map(c => `<td>${escHtmlExport(c)}</td>`).join('')}</tr>`).join('')}
+              </tbody>
+            </table>
+          </div>
+        `).join('');
+        closeModal('exportCenterModal');
+        document.body.classList.add('printing-slides');
+        const cleanup = () => {
+          document.body.classList.remove('printing-slides');
+          window.removeEventListener('afterprint', cleanup);
+        };
+        window.addEventListener('afterprint', cleanup);
+        window.print();
+        setTimeout(cleanup, 1500);
+        return;
+      }
+
+      addAuditLog('ส่งออกข้อมูล', `ส่งออกข้อมูล (${selectedKeys.join(', ')}) รูปแบบ ${fmt.toUpperCase()}`);
+      closeModal('exportCenterModal');
+    }
+
     // --- 15. SETTINGS, ROLES & AUDIT LOGS ---
     function switchSettingsTab(tab) {
       currentSettingsTab = tab;
@@ -11540,5 +11871,6 @@
       initApp();
     }
   </script>
+  <div id="print-all-slides-container"></div>
 </body>
 </html>
